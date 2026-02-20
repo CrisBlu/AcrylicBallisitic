@@ -12,7 +12,7 @@ public class Reticle : MonoBehaviour
     {
         Vector3 reticlePos = SceneCamera.cursorPos;
 
-        size = player.MultiShotPenalty * player.penaltyLevel;
+        size = player.MultiShotPenalty * player.penaltyLevel * 2;
 
         Vector3 sizeVector;
         if (size >  MinSize)

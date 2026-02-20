@@ -20,7 +20,7 @@ public class Movement : MonoBehaviour
     private InputAction attack;
     [HideInInspector] public int penaltyLevel = 0;
     Vector2 direction = Vector2.zero;
-    Vector3 ShootVec;
+    Vector3 LookVec;
     
 
 
@@ -47,9 +47,9 @@ public class Movement : MonoBehaviour
         rb.MovePosition(rb.position + directionv3 * Speed * Time.deltaTime);
 
 
-        ShootVec = SceneCamera.cursorPos;
-        ShootVec.y = transform.position.y;
-        transform.LookAt(ShootVec);
+        LookVec = SceneCamera.cursorPos;
+        LookVec.y = transform.position.y;
+        transform.LookAt(LookVec);
 
 
     }
@@ -59,15 +59,19 @@ public class Movement : MonoBehaviour
         //Will shoot past the cursor location and hit anything behind, can limit range to when was click if needed
         Debug.Log(penaltyLevel);
 
-        Vector3 GunShootDir = Vector3.Normalize(ShootVec - Gun.position);
+        Vector3 ShootAtPoint = LookVec;
 
         if (MultiShotPenalty > 0)
         {
-            GunShootDir.x += (Random.Range(-MultiShotPenalty, MultiShotPenalty) * penaltyLevel);
-            GunShootDir.z += (Random.Range(-MultiShotPenalty, MultiShotPenalty) * penaltyLevel);
+            ShootAtPoint.x += (Random.Range(-MultiShotPenalty, MultiShotPenalty) * penaltyLevel);
+            ShootAtPoint.z += (Random.Range(-MultiShotPenalty, MultiShotPenalty) * penaltyLevel);
         }
 
-        Ray ray = new Ray(Gun.position, Vector3.Normalize(GunShootDir));
+        Vector3 GunShootDir = Vector3.Normalize(ShootAtPoint - Gun.position);
+
+        
+
+        Ray ray = new Ray(Gun.position, GunShootDir);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 20))
         {
