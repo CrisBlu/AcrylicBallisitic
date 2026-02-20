@@ -35,6 +35,12 @@ public class PaintingMovementArea : MonoBehaviour
         return randomPosition;
     }
 
+    public bool IsOutOfBounds(Vector3 position)
+    {
+        Vector3 localPos = position - center;
+        return Mathf.Abs(localPos.x) > bounds.x / 2 - padding && Mathf.Abs(localPos.z) > bounds.z / 2 - padding;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -44,22 +50,22 @@ public class PaintingMovementArea : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // timer -= Time.deltaTime;
-        // if (timer <= 0.0f)
-        // {
-        //     randomPosition = GetRandomPosition(out randomNormal);
-        //     timer = 0.5f;
-        // }
+        timer -= Time.deltaTime;
+        if (timer <= 0.0f)
+        {
+            randomPosition = GetRandomPosition(out randomNormal);
+            timer = 0.5f;
+        }
     }
 
     void OnDrawGizmos()
     {
-        // Gizmos.color = Color.red;
-        // Gizmos.DrawWireCube(transform.position, bounds);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, bounds);
 
-        // Gizmos.color = Color.blue;
-        // Gizmos.DrawSphere(randomPosition, 1.0f);
-        // Gizmos.color = Color.green;
-        // Gizmos.DrawLine(randomPosition, randomPosition + randomNormal * 3.0f);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(randomPosition, 1.0f);
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(randomPosition, randomPosition + randomNormal * 3.0f);
     }
 }

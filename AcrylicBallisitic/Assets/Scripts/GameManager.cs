@@ -1,12 +1,14 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] PaintingController painting;
+    [SerializeField] List<PaintingController> paintings;
     [SerializeField] PaintingMovementArea movementArea;
 
-    public PaintingMovementArea GetMovementArea() { return movementArea; }
+    public Vector3 GetRandomPosition(out Vector3 outNormal) { return movementArea.GetRandomPosition(out outNormal); }
+    public bool IsOutOfBounds(Vector3 position) { return movementArea.IsOutOfBounds(position); }
 
     static public GameManager GetManager() { return instance;}
 
@@ -27,12 +29,10 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(painting.Spawn());
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            painting.Despawn();
+            foreach (PaintingController painting in paintings)
+            {
+                painting.Spawn();
+            }
         }
     }
 }
