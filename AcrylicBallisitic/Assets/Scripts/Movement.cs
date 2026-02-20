@@ -14,17 +14,9 @@ public class Movement : MonoBehaviour
     [SerializeField] Transform Gun;
     [SerializeField] GameObject BulletFX;
 
-    enum Ammo
-    {
-        Loaded,
-        Hit,
-        Miss
-    }
 
     //Called or will need to be called in different script, maybe player stats SO or Static is needed
     [SerializeField] public float MultiShotPenalty = .2f;
-    Ammo[] bullets = new Ammo[6];
-    int iBullet = 0;
     [HideInInspector] public int penaltyLevel = 0;
 
     private InputAction movement;
@@ -103,19 +95,11 @@ public class Movement : MonoBehaviour
 
         Ray ray = new Ray(Gun.position, GunShootDir);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 20))
+        if (Physics.Raycast(ray, out hit, 100))
         {
-            //Spend Bullet and Mark as Hit or Miss
-            if(true) //TODO: Add conditional based on structure of enemy
-            {
-                bullets[iBullet] = Ammo.Hit;
-            }
-            else
-            {
-                bullets[iBullet] = Ammo.Miss;
-            }
-            iBullet++;
-            if(iBullet >= 6)
+            //Shooting
+            GameManager.GetManager().UseBullet(true);
+            if(GameManager.GetManager().GetPlayerAmmoCount() == 0)
             {
                 canShoot = false;
                 Reload();
@@ -174,9 +158,7 @@ public class Movement : MonoBehaviour
             }
 
             timer = 0;
-            iBullet--;
-            bullets[i] = Ammo.Loaded;
-            Debug.Log(iBullet);
+            GameManager.GetManager().ReloadBullet();
         }
 
         canShoot = true;
