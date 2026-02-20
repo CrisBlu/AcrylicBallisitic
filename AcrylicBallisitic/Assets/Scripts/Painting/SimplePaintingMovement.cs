@@ -23,7 +23,7 @@ public class SimplePaintingMovement : PaintingMovement
         {
             moveTimer -= Time.deltaTime;
             Vector3 predictedPosition = transform.position + moveDirection * Time.deltaTime * speed;
-            if (game.IsOutOfBounds(predictedPosition))
+            if (game.GetMovementArea().IsOutOfBounds(predictedPosition))
             {
                 moveDirection = -moveDirection;
             }
