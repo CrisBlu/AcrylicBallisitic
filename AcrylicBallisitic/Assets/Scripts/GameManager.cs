@@ -7,8 +7,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<PaintingController> paintings;
     [SerializeField] PaintingMovementArea movementArea;
 
-    public Vector3 GetRandomPosition(out Vector3 outNormal) { return movementArea.GetRandomPosition(out outNormal); }
-    public bool IsOutOfBounds(Vector3 position) { return movementArea.IsOutOfBounds(position); }
+    public PaintingMovementArea GetMovementArea() { return movementArea; }
+
+    public Vector3 GetPlayerPosition() { return Vector3.zero; } // TODO: implement player tracking
     
     static public GameManager GetManager() { return instance; }
     static GameManager instance;

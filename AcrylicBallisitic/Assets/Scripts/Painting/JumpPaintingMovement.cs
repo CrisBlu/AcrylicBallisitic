@@ -25,24 +25,30 @@ public class JumpPaintingMovement : PaintingMovement
     override protected void Move()
     {
         base.Move();
-        Vector3 randomPosition = Vector3.zero;
-        Vector3 randomNormal = normal;
-        while (Vector3.Dot(randomNormal, normal) > 0.2f)
-        {
-            randomPosition = game.GetRandomPosition(out randomNormal);
-        }
 
-        float distance = Vector3.Distance(transform.position, randomPosition);
+        // Random jump position
+        // Vector3 randomPosition = Vector3.zero;
+        // Vector3 randomNormal = normal;
+        // while (Vector3.Dot(randomNormal, normal) > 0.2f)
+        // {
+        //     randomPosition = game.GetMovementArea().GetRandomPosition(out randomNormal);
+        // }
+
+        Vector3 playerPosition = game.GetPlayerPosition();
+        Vector3 toPlayer = playerPosition - transform.position;
+        Vector3 targetPosition = game.GetMovementArea().GetCrossingPositionFromDirection(toPlayer, out Vector3 targetNormal);
+
+        float distance = Vector3.Distance(transform.position, targetPosition);
         if (distance <= 10.0f) extraSpins = 0;
         else if (distance <= 25.0f) extraSpins = 1;
         else if (distance <= 45.0f) extraSpins = 2;
         else extraSpins = 3;
 
-        Tween.PositionAtSpeed(transform, randomPosition, jumpSpeed, Ease.InOutCubic)
+        Tween.PositionAtSpeed(transform, targetPosition, jumpSpeed, Ease.InOutCubic)
         .OnUpdate(transform, (target, tween) =>
         {
             Quaternion currentRot = Quaternion.LookRotation(-normal);
-            Quaternion targetRot = Quaternion.LookRotation(-randomNormal);
+            Quaternion targetRot = Quaternion.LookRotation(-targetNormal);
 
             float t = tween.interpolationFactor;
             Quaternion baseRot = Quaternion.Slerp(currentRot, targetRot, t);
@@ -55,12 +61,12 @@ public class JumpPaintingMovement : PaintingMovement
         })
         .OnComplete(() =>
         {
-            normal = randomNormal;
+            normal = targetNormal;
             jumpsDone++;
             Idle();
         });
-        transform.rotation = Quaternion.LookRotation(-randomNormal);
-        // Tween.Rotation(transform, Quaternion.LookRotation(-randomNormal), distance / jumpSpeed, Ease.InOutCubic);
+        transform.rotation = Quaternion.LookRotation(-targetNormal);
+        // Tween.Rotation(transform, Quaternion.LookRotation(-targetNormal), distance / jumpSpeed, Ease.InOutCubic);
     }
 
     override protected void Update()
