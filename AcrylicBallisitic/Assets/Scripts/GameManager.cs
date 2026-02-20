@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -35,8 +36,8 @@ public class GameManager : MonoBehaviour
     private int iBullet = 5;
 
 
-   
-    Ammo[] playerAmmo = new Ammo[6];
+
+    Ammo[] playerAmmo;
 
     public float GetTotalNetWorth()
     {
@@ -50,7 +51,10 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        InputSystem.actions.Enable();
         instance = this;
+
+        playerAmmo = new Ammo[6];
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

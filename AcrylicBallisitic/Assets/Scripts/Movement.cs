@@ -5,10 +5,10 @@ using UnityEngine.InputSystem;
 //TODO: Call this anything else please
 public class Movement : MonoBehaviour
 {
-    [SerializeField] int Speed = 1;
+    [SerializeField] int Speed = 15;
     [SerializeField] float BulletLineDuration = .05f;
     
-    [SerializeField] float PenaltyDuration = .1f;
+    [SerializeField] float PenaltyDuration = .25f;
     [SerializeField] float ReloadTime = 2f;
 
     [SerializeField] Transform Gun;
@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
 
 
     //Called or will need to be called in different script, maybe player stats SO or Static is needed
-    [SerializeField] public float MultiShotPenalty = .2f;
+    [SerializeField] public float MultiShotPenalty = .5f;
     [HideInInspector] public int penaltyLevel = 0;
 
     private InputAction movement;
@@ -69,7 +69,7 @@ public class Movement : MonoBehaviour
 
     }
 
-    //TODO: Add Ammo and Reload
+
     public void Shoot(InputAction.CallbackContext context)
     {
         if(!canShoot)
