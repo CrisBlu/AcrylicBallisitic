@@ -1,7 +1,5 @@
 using UnityEngine;
 using PrimeTween;
-using System.Diagnostics;
-using Unity.VisualScripting;
 
 public class PaintingMovement : MonoBehaviour
 {
@@ -16,6 +14,7 @@ public class PaintingMovement : MonoBehaviour
 
     Vector3 targetPosition;
     Vector3 startPosition;
+    Tween idleTween;
 
     protected State state = State.None;
     protected Vector3 normal;
@@ -35,7 +34,7 @@ public class PaintingMovement : MonoBehaviour
         transform.SetPositionAndRotation(startPosition, Quaternion.LookRotation(-normal));
         Tween.Position(transform, targetPosition, 1.5f, Ease.InOutCubic).OnComplete(() =>
         {
-            state = State.Idle;
+            Idle();
         });
     }
 
@@ -43,7 +42,6 @@ public class PaintingMovement : MonoBehaviour
     void Start()
     {
         game = GameManager.GetManager();
-        print(game);
     }
 
     // Update is called once per frame
@@ -81,12 +79,19 @@ public class PaintingMovement : MonoBehaviour
     virtual protected void Move() { state = State.Moving; }
 
     virtual protected bool ShouldIdle() { return false; }
-    virtual protected void Idle() { state = State.Idle; }
+    virtual protected void Idle()
+    {
+        state = State.Idle;
+        idleTween.Stop();
+        idleTween = Tween.LocalPositionY(transform, transform.position.y + Random.Range(-2f, 3f), 1.0f, Ease.InOutSine, -1, CycleMode.Yoyo);
+    }
 
     virtual protected bool ShouldDisappear() { return Input.GetKeyDown(KeyCode.Z); }
-    public void Disappear()
+    virtual protected void Disappear()
     {
         state = State.Disappearing;
+
+        idleTween.Stop();
 
         Vector3 position = transform.position;
         position.y += 20.0f;
@@ -98,7 +103,7 @@ public class PaintingMovement : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(targetPosition, 1.0f);
+        // Gizmos.color = Color.blue;
+        // Gizmos.DrawSphere(targetPosition, 1.0f);
     }
 }

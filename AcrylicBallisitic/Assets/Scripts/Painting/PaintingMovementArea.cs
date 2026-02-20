@@ -7,9 +7,9 @@ public class PaintingMovementArea : MonoBehaviour
 
     Vector3 center;
 
-    Vector3 randomPosition;
-    Vector3 randomNormal;
-    float timer = 0.5f;
+    // Vector3 randomPosition;
+    // Vector3 randomNormal;
+    // float timer = 0.5f;
 
     public Vector3 GetRandomPosition(out Vector3 outNormal)
     {
@@ -50,12 +50,12 @@ public class PaintingMovementArea : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0.0f)
-        {
-            randomPosition = GetRandomPosition(out randomNormal);
-            timer = 0.5f;
-        }
+        // timer -= Time.deltaTime;
+        // if (timer <= 0.0f)
+        // {
+        //     randomPosition = GetRandomPosition(out randomNormal);
+        //     timer = 0.5f;
+        // }
     }
 
     void OnDrawGizmos()
@@ -63,9 +63,9 @@ public class PaintingMovementArea : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, bounds);
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(randomPosition, 1.0f);
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(randomPosition, randomPosition + randomNormal * 3.0f);
+        // Gizmos.color = Color.blue;
+        // Gizmos.DrawSphere(randomPosition, 1.0f);
+        // Gizmos.color = Color.green;
+        // Gizmos.DrawLine(randomPosition, randomPosition + randomNormal * 3.0f);
     }
 }

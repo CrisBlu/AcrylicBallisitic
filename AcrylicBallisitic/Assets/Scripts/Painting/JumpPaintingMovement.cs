@@ -33,7 +33,6 @@ public class JumpPaintingMovement : PaintingMovement
         }
 
         float distance = Vector3.Distance(transform.position, randomPosition);
-        print(distance);
         if (distance <= 10.0f) extraSpins = 0;
         else if (distance <= 25.0f) extraSpins = 1;
         else if (distance <= 45.0f) extraSpins = 2;
@@ -76,5 +75,11 @@ public class JumpPaintingMovement : PaintingMovement
     protected override bool ShouldDisappear()
     {
         return state == State.Idle && idleTimer <= 0.0f && jumpsDone >= jumpCount;
+    }
+
+    protected override void Disappear()
+    {
+        base.Disappear();
+        jumpsDone = 0;
     }
 }
