@@ -11,12 +11,14 @@ public class GameManager : MonoBehaviour
 
     public Vector3 GetPlayerPosition() { return Vector3.zero; } // TODO: implement player tracking
     public int GetPlayerHitPoints() { return playerHitPoints; } // TODO: implement player hit points tracking
+    public int GetPlayerAmmo() { return playerAmmo; } // TODO: implement player ammo tracking
     
     static public GameManager GetManager() { return instance; }
     static GameManager instance;
 
     int lastSpawnIndex = -1;
     int playerHitPoints = 6;
+    int playerAmmo = 6;
 
     public float GetTotalNetWorth()
     {
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         uiManager.UpdatePlayerHitPoints(playerHitPoints);
+        uiManager.UpdatePlayerAmmo(playerAmmo);
     }
 
     // Update is called once per frame
@@ -57,6 +60,12 @@ public class GameManager : MonoBehaviour
         {
             playerHitPoints = Mathf.Max(0, playerHitPoints - 1);
             uiManager.UpdatePlayerHitPoints(playerHitPoints);
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            playerAmmo = Mathf.Max(0, playerAmmo - 1);
+            uiManager.UpdatePlayerAmmo(playerAmmo);
         }
     }
 

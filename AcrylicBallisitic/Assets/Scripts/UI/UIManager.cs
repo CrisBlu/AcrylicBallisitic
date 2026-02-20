@@ -4,11 +4,17 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] HitPointsDisplay hitPointsDisplay;
+    [SerializeField] SlotsDisplay hitPointsDisplay;
+    [SerializeField] SlotsDisplay ammoDisplay;
     [SerializeField] Slider netWorthSlider;
 
     public void UpdatePlayerHitPoints(int hitPoints)
     {
-        hitPointsDisplay.SetHitPoints(hitPoints);
+        hitPointsDisplay.SetSlots(hitPoints);
+    }
+
+    public void UpdatePlayerAmmo(int ammo)
+    {
+        ammoDisplay.SetSlots(ammo);
     }
 }
