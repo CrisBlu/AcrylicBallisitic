@@ -9,10 +9,21 @@ public class GameManager : MonoBehaviour
 
     public Vector3 GetRandomPosition(out Vector3 outNormal) { return movementArea.GetRandomPosition(out outNormal); }
     public bool IsOutOfBounds(Vector3 position) { return movementArea.IsOutOfBounds(position); }
-
-    static public GameManager GetManager() { return instance;}
-
+    
+    static public GameManager GetManager() { return instance; }
     static GameManager instance;
+
+    int lastSpawnIndex = -1;
+
+    public float GetTotalNetWorth()
+    {
+        float total = 0.0f;
+        foreach (PaintingController painting in paintings)
+        {
+            total += painting.GetHealth();
+        }
+        return total;
+    }
 
     void Awake()
     {
@@ -27,12 +38,25 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (ShouldSpawn())
         {
-            foreach (PaintingController painting in paintings)
+            int randomIndex = Random.Range(0, paintings.Count);
+            while (randomIndex == lastSpawnIndex)
             {
-                painting.Spawn();
+                randomIndex = Random.Range(0, paintings.Count);
             }
+            paintings[randomIndex].Spawn();
+            lastSpawnIndex = randomIndex;
         }
+    }
+
+    bool ShouldSpawn()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) return true;
+        foreach (PaintingController painting in paintings)
+        {
+            if (painting.GetComponent<PaintingMovement>().GetState() != PaintingMovement.State.None) return false;
+        }
+        return true;
     }
 }
