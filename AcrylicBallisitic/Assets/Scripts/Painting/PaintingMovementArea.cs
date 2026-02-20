@@ -43,12 +43,12 @@ public class PaintingMovementArea : MonoBehaviour
         float zDist = (bounds.z / 2 - padding) / Mathf.Abs(localDir.z);
         if (xDist < zDist)
         {
-            outNormal = localDir.x > 0 ? Vector3.right : Vector3.left;
+            outNormal = localDir.x < 0 ? Vector3.right : Vector3.left;
             return center + new Vector3(Mathf.Sign(localDir.x) * bounds.x / 2, 0.0f, localDir.z * xDist);
         }
         else
         {
-            outNormal = localDir.z > 0 ? Vector3.forward : Vector3.back;
+            outNormal = localDir.z < 0 ? Vector3.forward : Vector3.back;
             return center + new Vector3(localDir.x * zDist, 0.0f, Mathf.Sign(localDir.z) * bounds.z / 2);
         }
     }
