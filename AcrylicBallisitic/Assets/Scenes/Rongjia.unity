@@ -2161,7 +2161,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1001 &4302737240615091971
+--- !u!1001 &240309858630613630
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -2190,6 +2190,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4675964768633757990, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842204364483607015, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842204364483607015, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -2289,6 +2297,6 @@ SceneRoots:
   - {fileID: 2117269381}
   - {fileID: 1667131354}
   - {fileID: 411603622}
-  - {fileID: 4302737240615091971}
+  - {fileID: 240309858630613630}
   - {fileID: 732931034}
   - {fileID: 1906696256}
