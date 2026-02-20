@@ -483,7 +483,6 @@ GameObject:
   - component: {fileID: 749339492}
   - component: {fileID: 749339495}
   - component: {fileID: 749339494}
-  - component: {fileID: 749339493}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -506,27 +505,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1103739359}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &749339493
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 749339491}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &749339494
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -781,14 +759,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103739358}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.276, y: 0, z: 0.172}
+  m_LocalRotation: {x: -0, y: -0.031757094, z: -0, w: 0.9994956}
+  m_LocalPosition: {x: 0.249, y: 0, z: 0.324}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 749339492}
   m_Father: {fileID: 1855866487}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -3.64, z: 0}
 --- !u!1 &1244413043
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,6 +1113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1855866487}
   - component: {fileID: 1855866488}
+  - component: {fileID: 1855866489}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1172,7 +1151,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
   Speed: 3
-  SceneCamera: {fileID: 0}
+  BulletLineDuration: 0.05
+  MultiShotPenalty: 0.1
+  PenaltyDuration: 0.25
+  SceneCamera: {fileID: 990223446}
+  Gun: {fileID: 1103739359}
+  BulletFX: {fileID: 4208113292044221059, guid: 61a3362513e29294ba62209714047b69, type: 3}
+--- !u!54 &1855866489
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855866486}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 10
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2131961946
 GameObject:
   m_ObjectHideFlags: 0
