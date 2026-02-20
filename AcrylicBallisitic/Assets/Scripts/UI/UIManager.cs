@@ -12,10 +12,11 @@ public class UIManager : MonoBehaviour
 
     public void UpdatePlayerHitPoints(int hitPoints)
     {
-        hitPointsDisplay.SetSlots(hitPoints);
+        //Will probably be a number
+        //hitPointsDisplay.SetSlots(hitPoints);
     }
 
-    public void UpdatePlayerAmmo(int ammo)
+    public void UpdatePlayerAmmo(Ammo[] ammo)
     {
         ammoDisplay.SetSlots(ammo);
     }
