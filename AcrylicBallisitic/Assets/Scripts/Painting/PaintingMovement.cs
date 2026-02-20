@@ -27,7 +27,7 @@ public class PaintingMovement : MonoBehaviour
     {
         state = State.Emerging;
 
-        Vector3 position = game.GetRandomPosition(out normal);
+        Vector3 position = game.GetMovementArea().GetRandomPosition(out normal);
 
         targetPosition = position;
         startPosition = targetPosition + Vector3.up * 20.0f;

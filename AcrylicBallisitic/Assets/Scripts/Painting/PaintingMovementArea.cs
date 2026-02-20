@@ -35,6 +35,24 @@ public class PaintingMovementArea : MonoBehaviour
         return randomPosition;
     }
 
+    public Vector3 GetCrossingPositionFromDirection(Vector3 direction, out Vector3 outNormal)
+    {
+        outNormal = Vector3.zero;
+        Vector3 localDir = direction.normalized;
+        float xDist = (bounds.x / 2 - padding) / Mathf.Abs(localDir.x);
+        float zDist = (bounds.z / 2 - padding) / Mathf.Abs(localDir.z);
+        if (xDist < zDist)
+        {
+            outNormal = localDir.x > 0 ? Vector3.right : Vector3.left;
+            return center + new Vector3(Mathf.Sign(localDir.x) * bounds.x / 2, 0.0f, localDir.z * xDist);
+        }
+        else
+        {
+            outNormal = localDir.z > 0 ? Vector3.forward : Vector3.back;
+            return center + new Vector3(localDir.x * zDist, 0.0f, Mathf.Sign(localDir.z) * bounds.z / 2);
+        }
+    }
+
     public bool IsOutOfBounds(Vector3 position)
     {
         Vector3 localPos = position - center;
