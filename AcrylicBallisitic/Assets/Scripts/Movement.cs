@@ -2,25 +2,38 @@ using UnityEngine;
 using System.Threading.Tasks;
 using UnityEngine.InputSystem;
 
+//TODO: Call this anything else please
 public class Movement : MonoBehaviour
 {
     [SerializeField] int Speed = 1;
     [SerializeField] float BulletLineDuration = .05f;
-    [SerializeField] public float MultiShotPenalty = .2f;
+    
     [SerializeField] float PenaltyDuration = .1f;
+    [SerializeField] float ReloadTime = 2f;
 
-    //TODO: Make Camera a static object (probably)
     [SerializeField] Transform Gun;
     [SerializeField] GameObject BulletFX;
 
+    enum Ammo
+    {
+        Loaded,
+        Hit,
+        Miss
+    }
 
+    //Called or will need to be called in different script, maybe player stats SO or Static is needed
+    [SerializeField] public float MultiShotPenalty = .2f;
+    Ammo[] bullets = new Ammo[6];
+    int iBullet = 0;
+    [HideInInspector] public int penaltyLevel = 0;
 
     private InputAction movement;
     private Rigidbody rb;
     private InputAction attack;
-    [HideInInspector] public int penaltyLevel = 0;
+    private float penaltyTimer = 0;
     Vector2 direction = Vector2.zero;
     Vector3 LookVec;
+    private bool canShoot = true;
     
 
 
@@ -46,21 +59,38 @@ public class Movement : MonoBehaviour
         Vector3 directionv3 = new Vector3(direction.x, 0, direction.y);
         rb.MovePosition(rb.position + directionv3 * Speed * Time.deltaTime);
 
-
+        //Rotation to look at cursor
         LookVec = SceneCamera.cursorPos;
         LookVec.y = transform.position.y;
         transform.LookAt(LookVec);
 
+        //Multishot Penalty Timer
+        if (penaltyTimer > 0)
+        {
+            penaltyTimer -= Time.deltaTime;
+        }
+        else
+        {
+            penaltyLevel = 0;
+        }
+
 
     }
 
+    //TODO: Add Ammo and Reload
     public void Shoot(InputAction.CallbackContext context)
     {
-        //Will shoot past the cursor location and hit anything behind, can limit range to when was click if needed
+        if(!canShoot)
+        {
+            Debug.Log("Out of Ammo");
+            return;
+        }
+
+        //Will shoot past the cursor location and hit anything behind, can limit range to where was click if needed
         Debug.Log(penaltyLevel);
 
         Vector3 ShootAtPoint = LookVec;
-
+  
         if (MultiShotPenalty > 0)
         {
             ShootAtPoint.x += (Random.Range(-MultiShotPenalty, MultiShotPenalty) * penaltyLevel);
@@ -75,6 +105,22 @@ public class Movement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 20))
         {
+            //Spend Bullet and Mark as Hit or Miss
+            if(true) //TODO: Add conditional based on structure of enemy
+            {
+                bullets[iBullet] = Ammo.Hit;
+            }
+            else
+            {
+                bullets[iBullet] = Ammo.Miss;
+            }
+            iBullet++;
+            if(iBullet >= 6)
+            {
+                canShoot = false;
+                Reload();
+            }
+            
 
             //Bullet Line
             GameObject BFXObj = Instantiate(BulletFX, Gun);
@@ -85,14 +131,15 @@ public class Movement : MonoBehaviour
             BFXLineFade(BFXObj);
 
             penaltyLevel++;
-            Invoke("DecreasePenalty", PenaltyDuration * penaltyLevel);
+            penaltyTimer = PenaltyDuration;
+
             
 
 
         }
         else
         {
-            //This should never happen
+            //This should never happen currently
             Debug.Log("miss");
         }
 
@@ -110,6 +157,32 @@ public class Movement : MonoBehaviour
 
         Destroy(BFXObj);
 
+    }
+
+    public async void Reload()
+    {
+        float timer = 0;
+        float reloadTimePerBullet = ReloadTime / 6;
+        
+        //Maybe this is a bad idea, but for animation purposes I had the bullets reload one by one
+        for (int i = 0; i < 6; i++)
+        {
+            while (timer < reloadTimePerBullet)
+            {
+                timer += Time.deltaTime;
+                await Task.Yield();
+            }
+
+            timer = 0;
+            iBullet--;
+            bullets[i] = Ammo.Loaded;
+            Debug.Log(iBullet);
+        }
+
+        canShoot = true;
+        
+
+        
     }
 
     public void DecreasePenalty()
