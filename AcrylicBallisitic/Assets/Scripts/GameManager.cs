@@ -11,14 +11,32 @@ public class GameManager : MonoBehaviour
 
     public Vector3 GetPlayerPosition() { return Vector3.zero; } // TODO: implement player tracking
     public int GetPlayerHitPoints() { return playerHitPoints; } // TODO: implement player hit points tracking
-    public int GetPlayerAmmo() { return playerAmmo; } // TODO: implement player ammo tracking
+    public Ammo[] GetPlayerAmmo() { return playerAmmo; } 
+
+    public int GetPlayerAmmoCount()
+    {
+        int count = 0;
+        for(int i = 0; i < 6; i ++)
+        {
+            if (playerAmmo[i] == Ammo.Loaded)
+                count++;
+        }
+
+        return count;
+    }
     
     static public GameManager GetManager() { return instance; }
     static GameManager instance;
 
     int lastSpawnIndex = -1;
     int playerHitPoints = 6;
-    int playerAmmo = 6;
+
+    //Iterator for the bullet we are on
+    private int iBullet = 5;
+
+
+   
+    Ammo[] playerAmmo = new Ammo[6];
 
     public float GetTotalNetWorth()
     {
@@ -62,11 +80,6 @@ public class GameManager : MonoBehaviour
             uiManager.UpdatePlayerHitPoints(playerHitPoints);
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            playerAmmo = Mathf.Max(0, playerAmmo - 1);
-            uiManager.UpdatePlayerAmmo(playerAmmo);
-        }
     }
 
     bool ShouldSpawn()
@@ -78,4 +91,33 @@ public class GameManager : MonoBehaviour
         }
         return true;
     }
+
+    public void UpdateBullets(Ammo[] playerAmmo)
+    {
+        uiManager.UpdatePlayerAmmo(playerAmmo);
+    }
+
+    public void UseBullet(bool hit)
+    {
+        playerAmmo[iBullet] = hit ? Ammo.Hit : Ammo.Miss;
+        iBullet--;
+        uiManager.UpdatePlayerAmmo(playerAmmo);
+    }
+
+    public void ReloadBullet()
+    {
+        iBullet++;
+        playerAmmo[iBullet] = Ammo.Loaded;
+        uiManager.UpdatePlayerAmmo(playerAmmo);
+
+    }
+
+
+}
+
+public enum Ammo
+{
+    Loaded,
+    Hit,
+    Miss
 }

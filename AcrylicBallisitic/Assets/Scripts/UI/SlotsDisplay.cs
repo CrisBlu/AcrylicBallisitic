@@ -11,11 +11,11 @@ public class SlotsDisplay : MonoBehaviour
     GameObject[] slots;
     Image[] slotImages;
 
-    public void SetSlots(int slotsCount)
+    public void SetSlots(Ammo[] slots)
     {
         for (int i = 0; i < maxSlots; i++)
         {
-            if (i < slotsCount)
+            if (slots[i] == Ammo.Loaded)
             {
                 slotImages[i].sprite = fullSlotSprite;
             }
