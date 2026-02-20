@@ -4,10 +4,8 @@ using UnityEngine.UI;
 public class SlotsDisplay : MonoBehaviour
 {
     [SerializeField] GameObject slotPrefab;
-    [SerializeField] Color fullColor = Color.green;
-    [SerializeField] Color emptyColor = Color.darkGray;
-    // [SerializeField] Sprite fullSlotSprite;
-    // [SerializeField] Sprite emptySlotSprite;
+    [SerializeField] Sprite fullSlotSprite;
+    [SerializeField] Sprite emptySlotSprite;
     [SerializeField] int maxSlots = 6;
 
     GameObject[] slots;
@@ -19,11 +17,11 @@ public class SlotsDisplay : MonoBehaviour
         {
             if (i < slotsCount)
             {
-                slotImages[i].color = fullColor;
+                slotImages[i].sprite = fullSlotSprite;
             }
             else
             {
-                slotImages[i].color = emptyColor;
+                slotImages[i].sprite = emptySlotSprite;
             }
         }
     }
