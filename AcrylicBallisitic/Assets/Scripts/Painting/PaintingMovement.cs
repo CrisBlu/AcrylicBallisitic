@@ -22,6 +22,7 @@ public class PaintingMovement : MonoBehaviour
     protected GameManager game;
 
     public State GetState() { return state; }
+    public Vector3 GetNormal() { return normal; }
 
     public void Emerge()
     {

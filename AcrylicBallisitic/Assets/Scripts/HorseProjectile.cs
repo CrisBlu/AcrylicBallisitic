@@ -17,9 +17,6 @@ public class HorseProjectile : MonoBehaviour
     public float burstInterval = 0.1f;
     public float spreadAngle = 15f;
 
-
-    public GameObject projectilePrefab;
-
     [HideInInspector] public bool isSubProjectile = false;
 
     private Vector3 spawnLocation;
@@ -29,7 +26,7 @@ public class HorseProjectile : MonoBehaviour
     {
         spawnLocation = transform.position;
         spawnRotation = transform.rotation;
-        Destroy(projectilePrefab, LifeSpan);
+        Destroy(gameObject, LifeSpan);
         if (!isSubProjectile)
         {
             ExecuteBehavior();
@@ -38,8 +35,7 @@ public class HorseProjectile : MonoBehaviour
 
     void Update()
     {
-       transform.Translate(transform.forward * Speed * Time.deltaTime);
-
+       transform.position = transform.position + transform.forward * Speed * Time.deltaTime;
     }
 
     void ExecuteBehavior()
