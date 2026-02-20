@@ -27,7 +27,8 @@ public class SimplePaintingMovement : PaintingMovement
             {
                 moveDirection = -moveDirection;
             }
-            transform.position += moveDirection * Time.deltaTime * speed;
+            Vector3 newPosition = transform.position + moveDirection * Time.deltaTime * speed;
+            transform.position = new Vector3(newPosition.x, transform.position.y, newPosition.z);
         }
     }
 
