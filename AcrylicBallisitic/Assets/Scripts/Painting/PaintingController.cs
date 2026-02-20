@@ -17,10 +17,11 @@ public class PaintingController : MonoBehaviour
 
     public void DoDamage(float damage)
     {
-        if (movement.GetState() == PaintingMovement.State.Idle ||
-            movement.GetState() == PaintingMovement.State.Moving)
+        // if (movement.GetState() == PaintingMovement.State.Idle ||
+        //     movement.GetState() == PaintingMovement.State.Moving)
         {
             health -= damage;
+            GameManager.GetManager().NotifyDamageDealt(damage);
             if (health <= 0.0f)
             {
                 // TODO: death
@@ -29,6 +30,7 @@ public class PaintingController : MonoBehaviour
     }
 
     public float GetHealth() { return health; }
+    public float GetMaxHealth() { return maxHealth; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

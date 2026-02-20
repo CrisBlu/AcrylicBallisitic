@@ -16,11 +16,17 @@ public class GameManager : MonoBehaviour
     static public GameManager GetManager() { return instance; }
     static GameManager instance;
 
+    float previousNetWorth = 0.0f;
+    bool isDamageCleared = true;
+    bool isDamageDecaying = false;
+    float damageDecayDelay = 1.0f;
+    float damageDecayTimer = 0.0f;
+
     int lastSpawnIndex = -1;
     int playerHitPoints = 6;
     int playerAmmo = 6;
 
-    public float GetTotalNetWorth()
+    public float GetNetWorth()
     {
         float total = 0.0f;
         foreach (PaintingController painting in paintings)
@@ -28,6 +34,28 @@ public class GameManager : MonoBehaviour
             total += painting.GetHealth();
         }
         return total;
+    }
+
+    public float GetMaxNetWorth()
+    {
+        float total = 0.0f;
+        foreach (PaintingController painting in paintings)
+        {
+            total += painting.GetMaxHealth();
+        }
+        return total;
+    }
+    
+    public void NotifyDamageDealt(float damage)
+    {
+        if (isDamageCleared)
+        {
+            isDamageCleared = false;
+            previousNetWorth = GetNetWorth() + damage;
+        }
+        uiManager.UpdateNetWorth(GetNetWorth(), previousNetWorth, damage);
+        damageDecayTimer = damageDecayDelay;
+        isDamageDecaying = false;
     }
 
     void Awake()
@@ -45,6 +73,33 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (previousNetWorth > GetNetWorth())
+        {
+            if (damageDecayTimer > 0.0f)
+            {
+                damageDecayTimer -= Time.deltaTime;
+            }
+            else
+            {
+                isDamageDecaying = true;
+            }
+
+            if (isDamageDecaying)
+            {
+                previousNetWorth -= 50.0f * Time.deltaTime;
+                if (previousNetWorth <= GetNetWorth())
+                {
+                    previousNetWorth = GetNetWorth();
+                    isDamageDecaying = false;
+                    isDamageCleared = true;
+                }
+                else
+                {
+                    uiManager.UpdateNetWorth(GetNetWorth(), previousNetWorth, 0.0f);
+                }
+            }
+        }
+
         if (ShouldSpawn())
         {
             int randomIndex = Random.Range(0, paintings.Count);
@@ -56,6 +111,7 @@ public class GameManager : MonoBehaviour
             lastSpawnIndex = randomIndex;
         }
 
+        // Debug
         if (Input.GetKeyDown(KeyCode.Z))
         {
             playerHitPoints = Mathf.Max(0, playerHitPoints - 1);
@@ -66,6 +122,11 @@ public class GameManager : MonoBehaviour
         {
             playerAmmo = Mathf.Max(0, playerAmmo - 1);
             uiManager.UpdatePlayerAmmo(playerAmmo);
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            paintings[0].DoDamage(50.0f);
         }
     }
 
