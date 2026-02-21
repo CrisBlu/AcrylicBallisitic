@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using PrimeTween;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -37,12 +38,13 @@ public class GameManager : MonoBehaviour
     float damageDecayTimer = 0.0f;
 
     int lastSpawnIndex = -1;
+    float spawnInterval = 25.0f;
+    float spawnTimer = 0.0f;
+
     int playerHitPoints = 6;
 
     //Iterator for the bullet we are on
     private int iBullet = 5;
-
-
 
     Ammo[] playerAmmo;
 
@@ -96,6 +98,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        spawnTimer += Time.deltaTime;
+        spawnInterval -= Time.deltaTime * 0.05f;
+
+        float reticleSize = Mathf.Max(0.5f, player.MultiShotPenalty * player.penaltyLevel);
+        print(reticleSize);
+        uiManager.UpdateReticle(reticleSize);
+
         if (previousNetWorth > GetNetWorth())
         {
             if (damageDecayTimer > 0.0f)
@@ -125,6 +134,7 @@ public class GameManager : MonoBehaviour
 
         if (ShouldSpawn())
         {
+            spawnTimer = 0.0f;
             int randomIndex = Random.Range(0, paintings.Count);
             while (paintings.Count > 1 && randomIndex == lastSpawnIndex)
             {
@@ -140,16 +150,25 @@ public class GameManager : MonoBehaviour
     bool ShouldSpawn()
     {
         if (Input.GetKeyDown(KeyCode.Space)) return true;
+        int activeCount = 0;
         foreach (PaintingController painting in paintings)
         {
-            if (painting.GetComponent<PaintingMovement>().GetState() != PaintingMovement.State.None) return false;
+            if (painting.GetComponent<PaintingMovement>().GetState() != PaintingMovement.State.None)
+            {
+                activeCount++;
+            }
         }
-        return true;
+
+        if (activeCount == 0) return true;
+        else if (activeCount == 1)
+        {
+            return spawnTimer >= spawnInterval;
+        }
+        return false;
     }
 
     public void DamagePlayer()
     {
-        
         playerHitPoints = Mathf.Max(0, playerHitPoints - 1);
         uiManager.UpdatePlayerHitPoints(playerHitPoints);
 
