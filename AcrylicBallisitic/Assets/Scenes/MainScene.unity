@@ -153,11 +153,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a5f15fe54ad9644db4cfb56c656bf28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ghost
-  attackInterval: 4
+  minAttackInterval: 1
+  maxAttackInterval: 3
   fuseTime: 1.5
-  blastRadius: 5
-  minSpawnDist: 3
-  maxSpawnDist: 6
+  minSpawnDist: 0
+  maxSpawnDist: 3
+  blastEffectPrefab: {fileID: 6449621488365407265, guid: 4eed8cb1f047518428f9adf83715591a, type: 3}
 --- !u!4 &22822347
 Transform:
   m_ObjectHideFlags: 0
@@ -167,7 +168,7 @@ Transform:
   m_GameObject: {fileID: 22822345}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -805,7 +806,6 @@ GameObject:
   - component: {fileID: 397034518}
   - component: {fileID: 397034521}
   - component: {fileID: 397034520}
-  - component: {fileID: 397034519}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -822,35 +822,12 @@ Transform:
   m_GameObject: {fileID: 397034517}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.56, y: -16.34, z: 9.08}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 22822347}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &397034519
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 397034517}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &397034520
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -876,7 +853,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 0a561f37e1f963840a7ccf7a2721c865, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
