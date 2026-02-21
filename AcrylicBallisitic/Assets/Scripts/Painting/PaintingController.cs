@@ -83,12 +83,12 @@ public class PaintingController : MonoBehaviour
 
     void HandleDropHealthPickup()
     {
-        Instantiate(healthPickupPrefab, transform.position, Quaternion.identity);
+        //Instantiate(healthPickupPrefab, transform.position, Quaternion.identity);
         if (Random.value <= dropChance)
         {
             if (healthPickupPrefab != null)
             {
-                Instantiate(healthPickupPrefab, transform.position, Quaternion.identity);
+                //Instantiate(healthPickupPrefab, transform.position, Quaternion.identity);
             }
         }
     }
