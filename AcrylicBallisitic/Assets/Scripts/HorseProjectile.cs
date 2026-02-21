@@ -1,4 +1,5 @@
 using System.Collections;
+using PrimeTween;
 using UnityEngine;
 using UnityEngine.ProBuilder;
 using UnityEngine.UIElements;
@@ -31,11 +32,17 @@ public class HorseProjectile : MonoBehaviour
         {
             ExecuteBehavior();
         }
+        
     }
 
     void Update()
     {
-       transform.position = transform.position + transform.forward * Speed * Time.deltaTime;
+       Vector3 newPosition = transform.position + transform.forward * Speed * Time.deltaTime;
+       if (ProjectileType != ProjectileType.Single)
+       {
+            newPosition += transform.right * Mathf.Sin(Time.time * 20f) * Random.Range(-0.2f, 0.2f); // Add slight horizontal wave
+       }
+       transform.position = newPosition;
     }
 
     void ExecuteBehavior()
@@ -61,12 +68,21 @@ public class HorseProjectile : MonoBehaviour
         copy.GetComponent<HorseProjectile>().isSubProjectile = true;
     }
 
+    void SpawnCopyTowardsPlayer()
+{
+        Vector3 toPlayer = GameManager.GetManager().GetPlayerPosition() - spawnLocation;
+        toPlayer.y = 0.0f;
+        GameObject copy = Instantiate(gameObject, spawnLocation, Quaternion.LookRotation(toPlayer));
+
+        copy.GetComponent<HorseProjectile>().isSubProjectile = true;
+    }
+
     IEnumerator BurstRoutine()
     {
         for (int i = 0; i < burstCount - 1; i++) // -1 because the first one already exists
         {
             yield return new WaitForSeconds(burstInterval);
-            SpawnCopy(0);
+            SpawnCopyTowardsPlayer();
         }
     }
 

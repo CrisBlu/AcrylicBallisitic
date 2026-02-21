@@ -246,9 +246,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HorseProjectile
   ProjectileType: 2
-  Speed: 40
+  Speed: 30
   LifeSpan: 3
   burstCount: 3
-  burstInterval: 0.35
+  burstInterval: 0.5
   spreadAngle: 15
   isSubProjectile: 0

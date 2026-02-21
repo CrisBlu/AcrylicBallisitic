@@ -244,7 +244,7 @@ MonoBehaviour:
   maxHealth: 300
   projectilePrefabs:
   - {fileID: 5491916927107671022, guid: 17223c66e941d3545965c4751ee85058, type: 3}
-  projectileSpawnInterval: 1
+  projectileSpawnInterval: 1.5
 --- !u!65 &2397464662254892955
 BoxCollider:
   m_ObjectHideFlags: 0
