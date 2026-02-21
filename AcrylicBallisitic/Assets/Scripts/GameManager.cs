@@ -177,6 +177,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void HealPlayer()
+    {
+        playerHitPoints = Mathf.Max(0, playerHitPoints + 1);
+        uiManager.UpdatePlayerHitPoints(playerHitPoints);
+    }
+
     public void UpdateBullets(Ammo[] playerAmmo)
     {
         uiManager.UpdatePlayerAmmo(playerAmmo);
