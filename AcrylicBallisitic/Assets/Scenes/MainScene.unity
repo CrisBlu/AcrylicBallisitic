@@ -176,6 +176,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Reticle
       objectReference: {fileID: 0}
+    - target: {fileID: 6862927948725792009, guid: 1a36d33134c640045b4ae8f3599772dc, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 5063194368926288242}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2404,7 +2408,7 @@ GameObject:
   - component: {fileID: 1153269301}
   m_Layer: 0
   m_Name: SimplePainting
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2469,7 +2473,7 @@ GameObject:
   - component: {fileID: 1162531805}
   m_Layer: 0
   m_Name: NoMovePainting
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2532,7 +2536,7 @@ GameObject:
   - component: {fileID: 1206281135}
   m_Layer: 0
   m_Name: JumpPainting
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4321,7 +4325,7 @@ MonoBehaviour:
   ReloadTime: 2
   Gun: {fileID: 5672136184702287794}
   BulletFX: {fileID: 4208113292044221059, guid: 61a3362513e29294ba62209714047b69, type: 3}
-  MultiShotPenalty: 0.1
+  MultiShotPenalty: 0.75
   penaltyLevel: 0
 --- !u!4 &5118248912344058848
 Transform:
@@ -4393,7 +4397,7 @@ MonoBehaviour:
   slotPrefab: {fileID: 7247765028794429638, guid: c735afb5b54663e4992c3f8c646a9bbb, type: 3}
   fullSlotSprite: {fileID: 21300000, guid: 664bf43f8eecf524c8f6278efd0e5a73, type: 3}
   emptySlotSprite: {fileID: 21300000, guid: c14c99cdf11e9ec46ba10260a060af56, type: 3}
-  specialSlotSprite: {fileID: 0}
+  specialSlotSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   maxSlots: 6
 --- !u!114 &5557148203239609902
 MonoBehaviour:

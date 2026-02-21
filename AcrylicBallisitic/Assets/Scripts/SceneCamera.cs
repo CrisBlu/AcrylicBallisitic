@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class SceneCamera : MonoBehaviour
@@ -33,5 +34,23 @@ public class SceneCamera : MonoBehaviour
         {
             return Vector3.zero;
         }
+    }
+
+    public async void Shake(float strength)
+    {
+        
+        float duration = .1f;
+        Vector3 startPos = transform.position;
+        float timer = 0;
+
+        while(timer < duration)
+        {
+            
+            timer += Time.deltaTime;
+            transform.position = startPos + Random.insideUnitSphere * strength;
+            await Task.Yield(); 
+        }
+
+        transform.position = startPos;
     }
 }
