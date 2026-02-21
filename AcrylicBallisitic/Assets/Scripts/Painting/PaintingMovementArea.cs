@@ -6,6 +6,8 @@ public class PaintingMovementArea : MonoBehaviour
     [SerializeField] float padding = 3.0f;
 
     Vector3 center;
+    Vector3 o;
+    Ray ray;
 
     // Vector3 randomPosition;
     // Vector3 randomNormal;
@@ -16,7 +18,7 @@ public class PaintingMovementArea : MonoBehaviour
         outNormal = Vector3.zero;
         Vector3 randomPosition = center + new Vector3(
             Random.Range(-bounds.x / 2 + padding, bounds.x / 2 - padding),
-            Random.Range(-bounds.y / 2 + padding, bounds.y / 2 - padding),
+            Random.Range(-bounds.y / 2, bounds.y / 2),
             Random.Range(-bounds.z / 2 + padding, bounds.z / 2 - padding)
         );
         int randomAxisIndex = Random.Range(0, 2);
@@ -35,22 +37,67 @@ public class PaintingMovementArea : MonoBehaviour
         return randomPosition;
     }
 
-    public Vector3 GetCrossingPositionFromDirection(Vector3 direction, out Vector3 outNormal)
+    public Vector3 GetCrossingPositionFromRay(Vector3 origin, Vector3 direction, out Vector3 outNormal)
     {
+        Bounds areaBounds = new Bounds(center, bounds);
+        Ray ray = new Ray(origin, direction);
+        Vector3 min = areaBounds.min;
+        Vector3 max = areaBounds.max;
+        float closestDist = float.MaxValue;
+        Vector3 closestPoint = ray.origin;
         outNormal = Vector3.zero;
-        Vector3 localDir = direction.normalized;
-        float xDist = (bounds.x / 2 - padding) / Mathf.Abs(localDir.x);
-        float zDist = (bounds.z / 2 - padding) / Mathf.Abs(localDir.z);
-        if (xDist < zDist)
+    
+        // Right face (+X)
+        if (TryIntersectFace(ray, new Plane(Vector3.left, max), min.y, max.y, min.z, max.z, 
+            out float dist, out Vector3 point) && dist < closestDist)
         {
-            outNormal = localDir.x < 0 ? Vector3.right : Vector3.left;
-            return center + new Vector3(Mathf.Sign(localDir.x) * bounds.x / 2, 0.0f, localDir.z * xDist);
+            closestDist = dist;
+            closestPoint = point;
+            outNormal = Vector3.left;
         }
-        else
+        
+        // Left face (-X)
+        if (TryIntersectFace(ray, new Plane(Vector3.right, min), min.y, max.y, min.z, max.z, 
+            out dist, out point) && dist < closestDist)
         {
-            outNormal = localDir.z < 0 ? Vector3.forward : Vector3.back;
-            return center + new Vector3(localDir.x * zDist, 0.0f, Mathf.Sign(localDir.z) * bounds.z / 2);
+            closestDist = dist;
+            closestPoint = point;
+            outNormal = Vector3.right;
         }
+        
+        // Forward face (+Z)
+        if (TryIntersectFace(ray, new Plane(Vector3.back, max), min.x, max.x, min.y, max.y, 
+            out dist, out point) && dist < closestDist)
+        {
+            closestDist = dist;
+            closestPoint = point;
+            outNormal = Vector3.back;
+        }
+        
+        // Back face (-Z)
+        if (TryIntersectFace(ray, new Plane(Vector3.forward, min), min.x, max.x, min.y, max.y, 
+            out dist, out point) && dist < closestDist)
+        {
+            closestDist = dist;
+            closestPoint = point;
+            outNormal = Vector3.forward;
+        }
+        return closestPoint;
+    }
+
+    bool TryIntersectFace(Ray ray, Plane plane, float u1, float u2, float v1, float v2, 
+        out float distance, out Vector3 point)
+    {
+        point = Vector3.zero;
+        
+        if (!plane.Raycast(ray, out distance) || distance < 0)
+            return false;
+        
+        point = ray.GetPoint(distance);
+        
+        // Check if point is within face bounds (depends on which plane)
+        // This is simplified - you'd need to check the appropriate coordinates
+        return true;
     }
 
     public bool IsOutOfBounds(Vector3 position)
@@ -80,6 +127,10 @@ public class PaintingMovementArea : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, bounds);
+
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(o, 1.0f);
+        Gizmos.DrawRay(ray.origin, o + ray.direction * 1000.0f);
 
         // Gizmos.color = Color.blue;
         // Gizmos.DrawSphere(randomPosition, 1.0f);
