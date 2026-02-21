@@ -750,6 +750,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1721338256382258186, guid: cba0767e85f43fb4984f4faca5ee3554, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2377791178248378261, guid: cba0767e85f43fb4984f4faca5ee3554, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2377791178248378261, guid: cba0767e85f43fb4984f4faca5ee3554, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5063194368897216238, guid: cba0767e85f43fb4984f4faca5ee3554, type: 3}
       propertyPath: Speed
       value: 15
@@ -879,8 +891,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 2.2002287, z: 1}
+  m_Center: {x: 0, y: -0.2070814, z: 0}
 --- !u!23 &1274894044
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1214,8 +1226,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.938332, z: 1}
+  m_Center: {x: 0, y: -0.2298406, z: 0}
 --- !u!23 &1667131352
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2104,8 +2116,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.9776919, z: 1}
+  m_Center: {x: 0, y: -0.21638799, z: 0}
 --- !u!23 &2117269379
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2281,6 +2293,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4675964768633757990, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842204364483607015, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842204364483607015, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
