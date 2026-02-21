@@ -152,6 +152,11 @@ public class GameManager : MonoBehaviour
         
         playerHitPoints = Mathf.Max(0, playerHitPoints - 1);
         uiManager.UpdatePlayerHitPoints(playerHitPoints);
+
+        if(playerHitPoints <= 0)
+        {
+            Debug.Log("GameOver");
+        }
     }
 
     public void UpdateBullets(Ammo[] playerAmmo)

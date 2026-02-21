@@ -26,9 +26,9 @@ public class Movement : MonoBehaviour
     Vector2 direction = Vector2.zero;
     Vector3 LookVec;
     private bool canShoot = true;
-    
 
 
+    LayerMask wallCheck;
     
 
     void Start()
@@ -39,6 +39,8 @@ public class Movement : MonoBehaviour
         attack.performed += Shoot;
 
         rb = GetComponent<Rigidbody>();
+
+        wallCheck = LayerMask.GetMask("Wall");
         
         
         
@@ -49,6 +51,24 @@ public class Movement : MonoBehaviour
         //Movement
         direction = movement.ReadValue<Vector2>();
         Vector3 directionv3 = new Vector3(direction.x, 0, direction.y);
+
+        if(direction.x != 0)
+        {
+            Vector3 directionX = new Vector3(direction.x, 0, 0);
+            if(Physics.Raycast(transform.position, directionX, 2, wallCheck))
+            {
+                directionv3.x = 0;
+            }
+        }
+
+        if(direction.y != 0)
+        {
+            Vector3 directionY = new Vector3(0, 0, direction.y);
+            if (Physics.Raycast(transform.position, directionY, 2, wallCheck))
+            {
+                directionv3.z = 0;
+            }
+        }
 
         rb.MovePosition(rb.position + directionv3 * Speed * Time.deltaTime);
 
@@ -75,12 +95,10 @@ public class Movement : MonoBehaviour
     {
         if(!canShoot)
         {
-            Debug.Log("Out of Ammo");
             return;
         }
 
         //Will shoot past the cursor location and hit anything behind, can limit range to where was click if needed
-        Debug.Log(penaltyLevel);
 
         Vector3 ShootAtPoint = LookVec;
   
@@ -104,11 +122,13 @@ public class Movement : MonoBehaviour
             {
                 hitSomething = true;
                 hit.collider.gameObject.GetComponent<PaintingController>().DoDamage(10);
+                
             }
             else
             {
                 hitSomething = false;
             }
+
 
             //Shooting
             GameManager.GetManager().UseBullet(hitSomething);
@@ -160,9 +180,23 @@ public class Movement : MonoBehaviour
     public async void Reload()
     {
         float timer = 0;
-        float reloadTimePerBullet = ReloadTime / 6;
+        bool perfectRound = true;
+
+        //Reload faster if all bullets are marked as hits
+        Ammo[] playerAmmo = GameManager.GetManager().GetPlayerAmmo();
+        foreach(Ammo shot in playerAmmo)
+        {
+            if(shot == Ammo.Miss)
+            {
+                perfectRound = false;
+                break;
+            }
+        }
+
+
+        float reloadTimePerBullet = perfectRound ? .5f/6 : ReloadTime / 6;
         
-        //Maybe this is a bad idea, but for animation purposes I had the bullets reload one by one
+
         for (int i = 0; i < 6; i++)
         {
             while (timer < reloadTimePerBullet)
