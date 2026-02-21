@@ -84,7 +84,7 @@ public class PaintingMovement : MonoBehaviour
     {
         state = State.Idle;
         idleTween.Stop();
-        idleTween = Tween.LocalPositionY(transform, transform.position.y + Random.Range(-2f, 3f), 1.0f, Ease.InOutSine, -1, CycleMode.Yoyo);
+        idleTween = Tween.LocalPositionY(transform, transform.position.y + Random.Range(-1f, 2f), 1.0f, Ease.InOutSine, -1, CycleMode.Yoyo);
     }
 
     virtual protected bool ShouldDisappear() { return Input.GetKeyDown(KeyCode.Z); }
