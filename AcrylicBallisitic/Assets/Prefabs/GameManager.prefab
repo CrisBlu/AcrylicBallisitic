@@ -908,6 +908,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DifficultyProgression
   currentDifficulty: 0
+  normalThreshold: 0.99
+  difficultThreshold: 0.33
 --- !u!1 &5724894056670785233
 GameObject:
   m_ObjectHideFlags: 0
