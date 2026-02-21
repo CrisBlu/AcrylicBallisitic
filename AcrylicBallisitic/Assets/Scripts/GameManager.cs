@@ -115,11 +115,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void UpdateBullets(Ammo[] playerAmmo)
-    {
-        uiManager.UpdatePlayerAmmo(playerAmmo);
-    }
-
     public void UseBullet(bool hit)
     {
         playerAmmo[iBullet] = hit ? Ammo.Hit : Ammo.Miss;
@@ -132,7 +127,24 @@ public class GameManager : MonoBehaviour
         iBullet++;
         playerAmmo[iBullet] = Ammo.Loaded;
         uiManager.UpdatePlayerAmmo(playerAmmo);
+    }
 
+    public void AmmoPowerUp()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            playerAmmo[i] = Ammo.PowerUp;
+        }
+        uiManager.UpdatePlayerAmmo(playerAmmo);
+    }
+
+    public void AmmoPowerDown()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            playerAmmo[i] = Ammo.Loaded;
+        }
+        uiManager.UpdatePlayerAmmo(playerAmmo);
     }
 
     //******************************************************
@@ -253,5 +265,6 @@ public enum Ammo
 {
     Loaded,
     Hit,
-    Miss
+    Miss,
+    PowerUp
 }

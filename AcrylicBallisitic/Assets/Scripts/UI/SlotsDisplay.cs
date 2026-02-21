@@ -4,18 +4,11 @@ using UnityEngine.UI;
 
 public class SlotsDisplay : MonoBehaviour
 {
-    public enum SlotType
-    {
-        Full,
-        Empty,
-        Special
-    }
-
     [SerializeField] GameObject slotPrefab;
-    [SerializeField] Dictionary<SlotType, Sprite> slotSprites;
     [SerializeField] Sprite fullSlotSprite;
     [SerializeField] Sprite emptySlotSprite;
-    [SerializeField] Sprite specialSlotSprite;
+    [SerializeField] Sprite hitSlotSprite;
+    [SerializeField] Sprite powerUpSlotSprite;
     [SerializeField] int maxSlots = 6;
 
     GameObject[] slots;
@@ -36,7 +29,11 @@ public class SlotsDisplay : MonoBehaviour
             }
             else if (slots[i] == Ammo.Hit)
             {
-                slotImages[i].sprite = specialSlotSprite;
+                slotImages[i].sprite = hitSlotSprite;
+            }
+            else if (slots[i] == Ammo.PowerUp)
+            {
+                slotImages[i].sprite = powerUpSlotSprite;
             }
         }
     }
