@@ -178,6 +178,7 @@ public class GameManager : MonoBehaviour
         netWorth = GetMaxNetWorth();
         audioPlayer = GetComponent<AudioPlayer>();
         Cursor.visible = false;
+        uiManager.UpdateNetWorth(GetNetWorth(), GetNetWorth(), 0.0f);
     }
 
     void OnDestroy()
@@ -219,10 +220,7 @@ public class GameManager : MonoBehaviour
                     isDamageDecaying = false;
                     isDamageCleared = true;
                 }
-                else
-                {
-                    uiManager.UpdateNetWorth(GetNetWorth(), previousNetWorth, 0.0f);
-                }
+                uiManager.UpdateNetWorth(GetNetWorth(), previousNetWorth, 0.0f);
             }
         }
 

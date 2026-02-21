@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] SlotsDisplay ammoDisplay;
     [SerializeField] Slider netWorthSlider;
     [SerializeField] Slider netWorthDamageSlider;
+    [SerializeField] TMP_Text netWorthText;
     [SerializeField] Image reticle;
 
     public void UpdatePlayerHitPoints(int hitPoints)
@@ -38,6 +39,9 @@ public class UIManager : MonoBehaviour
         netWorthDamageSliderRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, end - start);
         netWorthDamageSliderRect.anchoredPosition = new Vector2((end + start) / 2, netWorthDamageSliderRect.anchoredPosition.y);
         netWorthDamageSlider.value = 1.0f;
+        
+        float netWorthValue = previousNetWorth * 10000f;
+        netWorthText.text = Mathf.RoundToInt(netWorthValue).ToString("C2");
     }
 
     public void UpdateReticle(float size)
