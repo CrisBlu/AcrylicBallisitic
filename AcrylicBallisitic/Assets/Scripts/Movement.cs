@@ -123,7 +123,7 @@ public class Movement : MonoBehaviour
             if(hit.collider.CompareTag("Enemy"))
             {
                 hitSomething = true;
-                //hit.collider.gameObject.GetComponent<PaintingController>().DoDamage(10);
+                hit.collider.gameObject.GetComponent<PaintingController>().DoDamage(10);
                 
             }
             else
