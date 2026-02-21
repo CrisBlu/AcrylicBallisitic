@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     public void UpdatePlayerHitPoints(int hitPoints)
     {
         //Will probably be a number
-        //hitPointsDisplay.SetSlots(hitPoints);
+        hitPointsDisplay.SetHealth(hitPoints);
     }
 
     public void UpdatePlayerAmmo(Ammo[] ammo)
