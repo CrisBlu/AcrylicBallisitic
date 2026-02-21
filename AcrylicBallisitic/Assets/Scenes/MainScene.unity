@@ -2558,7 +2558,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1136101837
 Transform:
   m_ObjectHideFlags: 0
@@ -2964,9 +2964,25 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -22
       objectReference: {fileID: 0}
+    - target: {fileID: 3205328070748974954, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: normalThreshold
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205328070748974954, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: currentDifficulty
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3749044899226612533, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
       propertyPath: m_Color.a
       value: 0.7058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 3890176729604382253, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 990223446}
+    - target: {fileID: 3890176729604382253, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4036242149407182276, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3003,6 +3019,38 @@ PrefabInstance:
     - target: {fileID: 5674466145031655022, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6545778191027692382, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6545778191027692382, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6545778191027692382, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581761731673779274, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581761731673779274, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581761731673779274, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581761731673779274, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 2560
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581761731673779274, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1440
       objectReference: {fileID: 0}
     - target: {fileID: 6582942082022989577, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
       propertyPath: player
