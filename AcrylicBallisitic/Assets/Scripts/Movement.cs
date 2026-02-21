@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine.InputSystem;
 
@@ -18,6 +19,8 @@ public class Movement : MonoBehaviour
     [SerializeField] public float MultiShotPenalty = .5f;
     [HideInInspector] public int penaltyLevel = 0;
 
+    [SerializeField] public float PowerupDuration = 3.5f;
+
     [SerializeField] Animator animator;
 
     private InputAction movement;
@@ -27,6 +30,7 @@ public class Movement : MonoBehaviour
     Vector2 direction = Vector2.zero;
     Vector3 LookVec;
     private bool canShoot = true;
+    private bool isPoweredUp = false;
 
     LayerMask wallCheck;
     
@@ -142,13 +146,18 @@ public class Movement : MonoBehaviour
 
 
             //Shooting
-            GameManager.GetManager().UseBullet(hitSomething);
-            if(GameManager.GetManager().GetPlayerAmmoCount() == 0)
+            if (!isPoweredUp)
+            {
+                GameManager.GetManager().UseBullet(hitSomething);
+            }
+
+            if (GameManager.GetManager().GetPlayerAmmoCount() == 0)
             {
                 canShoot = false;
                 Reload();
             }
-            
+
+
 
             //Bullet Line
             GameObject BFXObj = Instantiate(BulletFX, Gun);
@@ -158,9 +167,13 @@ public class Movement : MonoBehaviour
 
             BFXLineFade(BFXObj);
 
-            penaltyLevel++;
-            SceneCamera.Inst.Shake(.5f * penaltyLevel);
-            penaltyTimer = PenaltyDuration;
+            if (!isPoweredUp)
+            {
+                penaltyLevel++;
+                SceneCamera.Inst.Shake(.5f * penaltyLevel);
+                penaltyTimer = PenaltyDuration;
+            }
+
 
 
 
@@ -233,10 +246,22 @@ public class Movement : MonoBehaviour
             penaltyLevel--;
 
     }
-    
 
-  
-    
+    IEnumerator PowerUp()
+    {
+        isPoweredUp = true;
+        yield return new WaitForSeconds(PowerupDuration);
+        isPoweredUp = false;
+    }
+
+    public void TriggerPowerUp()
+    {
+        StartCoroutine(PowerUp());
+    }
+
+
+
+
 
 
 }
