@@ -102,7 +102,6 @@ public class GameManager : MonoBehaviour
         spawnInterval -= Time.deltaTime * 0.05f;
 
         float reticleSize = Mathf.Max(0.5f, player.MultiShotPenalty * player.penaltyLevel);
-        print(reticleSize);
         uiManager.UpdateReticle(reticleSize);
 
         if (previousNetWorth > GetNetWorth())
