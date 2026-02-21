@@ -11,8 +11,6 @@ public class JumpPaintingMovement : PaintingMovement
     int extraSpins = 0;
     float idleTimer = 0.0f;
 
-    Vector3 targetPosition;
-
     protected override void Idle()
     {
         base.Idle();
@@ -38,7 +36,9 @@ public class JumpPaintingMovement : PaintingMovement
 
         Vector3 playerPosition = game.GetPlayerPosition();
         Vector3 toPlayer = playerPosition - transform.position;
-        targetPosition = game.GetMovementArea().GetCrossingPositionFromDirection(toPlayer, out Vector3 targetNormal);
+        toPlayer.y = 0.0f;
+        toPlayer.Normalize();
+        Vector3 targetPosition = game.GetMovementArea().GetCrossingPositionFromRay(transform.position + toPlayer * 1.5f, toPlayer, out Vector3 targetNormal);
 
         float distance = Vector3.Distance(transform.position, targetPosition);
         if (distance <= 10.0f) extraSpins = 0;
@@ -89,16 +89,5 @@ public class JumpPaintingMovement : PaintingMovement
     {
         base.Disappear();
         jumpsDone = 0;
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, 1.0f);
-        Gizmos.DrawSphere(game.GetPlayerPosition(), 1.0f);
-        Gizmos.DrawSphere(targetPosition, 1.0f);
-
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(transform.position, targetPosition);
     }
 }
