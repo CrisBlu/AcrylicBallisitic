@@ -87,7 +87,15 @@ public class PaintingController : MonoBehaviour
         {
             if (healthPickupPrefab != null)
             {
-                Instantiate(healthPickupPrefab, transform.position, Quaternion.identity);
+                GameObject loot = Instantiate(healthPickupPrefab, transform.position, Quaternion.identity);
+                Rigidbody rb = loot.GetComponent<Rigidbody>();
+
+                if (rb != null)
+                {
+                    Vector3 forceDirection = new Vector3(Random.Range(-0.5f, 0.5f), 1f, Random.Range(-0.5f, 0.5f));
+                    float forceStrength = 5f;
+                    rb.AddForce(forceDirection.normalized * forceStrength, ForceMode.Impulse);
+                }
             }
         }
     }

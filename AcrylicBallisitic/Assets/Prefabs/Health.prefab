@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 4906489728494348613}
   - component: {fileID: 4122900984967083081}
   - component: {fileID: 2030968812419071216}
-  - component: {fileID: 72127312804489248}
-  m_Layer: 0
+  - component: {fileID: 8121535586880795818}
+  m_Layer: 2
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &72127312804489248
+--- !u!54 &8121535586880795818
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
