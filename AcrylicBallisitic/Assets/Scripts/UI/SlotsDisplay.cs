@@ -25,6 +25,7 @@ public class SlotsDisplay : MonoBehaviour
     {
         for (int i = 0; i < maxSlots; i++)
         {
+            if (slotImages == null || slotImages[i] == null || i >= slotImages.Length) continue;
             if (slots[i] == Ammo.Loaded)
             {
                 slotImages[i].sprite = fullSlotSprite;
@@ -42,9 +43,9 @@ public class SlotsDisplay : MonoBehaviour
 
     public void SetHealth(int hpCount)
     {
-        
         for (int i = 0; i < maxSlots; i++)
         {
+            if (slotImages == null || slotImages[i] == null || i >= slotImages.Length) continue;
             if (i < hpCount)
             {
                 slotImages[i].sprite = fullSlotSprite;
@@ -54,17 +55,19 @@ public class SlotsDisplay : MonoBehaviour
                 slotImages[i].sprite = emptySlotSprite;
             }
         }
-
     }
 
-    void Start()
+    void Awake()
     {
         // Delete all children (in case there are any in the editor)
         foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
         }
+    }
 
+    void Start()
+    {
         slots = new GameObject[maxSlots];
         slotImages = new Image[maxSlots];
         for (int i = 0; i < maxSlots; i++)
@@ -72,5 +75,11 @@ public class SlotsDisplay : MonoBehaviour
             slots[i] = Instantiate(slotPrefab, transform);
             slotImages[i] = slots[i].GetComponent<Image>();
         }
+    }
+
+    void OnDestroy()
+    {
+        slots = null;
+        slotImages = null;   
     }
 }
