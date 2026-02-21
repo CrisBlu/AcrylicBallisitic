@@ -18,6 +18,8 @@ public class StanAnimCtrl : MonoBehaviour
         {
             Debug.LogError("Animator component not found on this GameObject!");
         }
+
+        
     }
 
     // Update is called once per frame
