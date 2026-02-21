@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1280, y: -25}
+  m_AnchoredPosition: {x: 1280, y: -22}
   m_SizeDelta: {x: 2560, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6368924077529600995
@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.17254902}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.7058824}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -894,6 +894,7 @@ MonoBehaviour:
   uiManager: {fileID: 8413479336601440911}
   difficultyProgression: {fileID: 3205328070748974954}
   player: {fileID: 0}
+  maxNetWorth: 900
 --- !u!114 &3205328070748974954
 MonoBehaviour:
   m_ObjectHideFlags: 0
