@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1286624049734952087}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.59446865, y: -1.62, z: 0.61}
+  m_LocalPosition: {x: 0.59446865, y: 18.21, z: 0.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55,8 +55,8 @@ MonoBehaviour:
     serializedVersion: 0
     m_Bits: 1
   m_ScaleMode: 0
-  m_Offset: {x: 0, y: 0, z: 0.5}
-  m_Size: {x: 10, y: 10, z: 1}
+  m_Offset: {x: 0, y: 0, z: 4.375}
+  m_Size: {x: 10, y: 10, z: 8.75}
   m_FadeFactor: 1
   version: 1
   m_DecalLayerMask: 1
@@ -77,7 +77,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8765276699182973986
 Transform:
   m_ObjectHideFlags: 0
@@ -108,7 +108,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3028216654558281835}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -202,6 +202,7 @@ MonoBehaviour:
   fuseTime: 1.5
   minSpawnDist: 0
   maxSpawnDist: 3
+  blastIndicatorPrefab: {fileID: 6575380582950360253, guid: 9859fb6f76c6787489545d874e669fb2, type: 3}
   blastEffectPrefab: {fileID: 6449621488365407265, guid: 4eed8cb1f047518428f9adf83715591a, type: 3}
 --- !u!1001 &8472451057985458710
 PrefabInstance:
@@ -229,7 +230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7baf7110869326841a2a974275c491ca, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.2003994
+      value: 8.51
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7baf7110869326841a2a974275c491ca, type: 3}
       propertyPath: m_LocalPosition.z
