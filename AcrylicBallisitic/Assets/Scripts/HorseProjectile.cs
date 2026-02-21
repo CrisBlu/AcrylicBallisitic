@@ -76,6 +76,10 @@ public class HorseProjectile : MonoBehaviour
         {
             GameManager.GetManager().DamagePlayer();
         }
+        else if (other.GetComponent<Furniture>() != null)
+        {
+            other.GetComponent<Furniture>().DoDamage();
+        }
     }
 }
 

@@ -42,8 +42,6 @@ public class GameManager : MonoBehaviour
     //Iterator for the bullet we are on
     private int iBullet = 5;
 
-
-
     Ammo[] playerAmmo;
 
     public float GetNetWorth()
@@ -96,6 +94,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float reticleSize = Mathf.Max(0.5f, player.MultiShotPenalty * player.penaltyLevel);
+        print(reticleSize);
+        uiManager.UpdateReticle(reticleSize);
+
         if (previousNetWorth > GetNetWorth())
         {
             if (damageDecayTimer > 0.0f)

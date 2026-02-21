@@ -25,7 +25,7 @@ public class SceneCamera : MonoBehaviour
         mousePos.z = cam.nearClipPlane;
         Ray ray = cam.ScreenPointToRay(mousePos);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100))
+        if (Physics.Raycast(ray, out hit, 100, LayerMask.GetMask("Ground")))
         {
             return hit.point;
         }
