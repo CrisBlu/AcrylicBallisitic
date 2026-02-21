@@ -1368,6 +1368,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5118248912344058848}
     m_Modifications:
+    - target: {fileID: 3838366444828215989, guid: 027bbb59d9ceaa24f8ca560b86956eb5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 4895699156993210018, guid: 027bbb59d9ceaa24f8ca560b86956eb5, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.4566
@@ -3449,6 +3453,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4895699156993210018, guid: 027bbb59d9ceaa24f8ca560b86956eb5, type: 3}
   m_PrefabInstance: {fileID: 931487689}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1881789588 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1518039240124902616, guid: 027bbb59d9ceaa24f8ca560b86956eb5, type: 3}
+  m_PrefabInstance: {fileID: 931487689}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1885181754
 GameObject:
   m_ObjectHideFlags: 0
@@ -4086,6 +4095,7 @@ MonoBehaviour:
   BulletFX: {fileID: 4208113292044221059, guid: 61a3362513e29294ba62209714047b69, type: 3}
   MultiShotPenalty: 1
   penaltyLevel: 0
+  animator: {fileID: 1881789588}
 --- !u!4 &5118248912344058848
 Transform:
   m_ObjectHideFlags: 0

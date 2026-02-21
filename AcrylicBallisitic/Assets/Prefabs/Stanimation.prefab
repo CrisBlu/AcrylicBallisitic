@@ -63,9 +63,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 486e3cf0c25a21940a21e76c0af7d436, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8153454288650558721}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 486e3cf0c25a21940a21e76c0af7d436, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6593929671068227683}
   m_SourcePrefab: {fileID: 100100000, guid: 486e3cf0c25a21940a21e76c0af7d436, type: 3}
 --- !u!1 &5240735163149855768 stripped
 GameObject:
@@ -88,15 +85,3 @@ Animation:
   m_AnimatePhysics: 0
   m_UpdateMode: 0
   m_CullingType: 0
---- !u!114 &6593929671068227683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5240735163149855768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd10e9c82d1b989468cc19b8af50671f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StanAnimCtrl
