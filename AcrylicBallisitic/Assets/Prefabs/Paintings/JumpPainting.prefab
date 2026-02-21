@@ -67,6 +67,7 @@ MonoBehaviour:
   projectilePrefabs: []
   projectileSpawnInterval: 1
   healthPickupPrefab: {fileID: 8512744933115948769, guid: ede10bbe1bb3324429df7607461f41dd, type: 3}
+  powerupPickupPrefab: {fileID: 2276470627857686489, guid: 41fd1831ab971b344a1de5cf4a940a8a, type: 3}
   dropChance: 0.1
 --- !u!65 &9003744943256014146
 BoxCollider:
@@ -193,7 +194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a2563631c63c74345958bc54b5151e1d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.932
+      value: -5.55
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a2563631c63c74345958bc54b5151e1d, type: 3}
       propertyPath: m_LocalPosition.z
