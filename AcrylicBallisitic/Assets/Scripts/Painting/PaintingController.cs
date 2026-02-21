@@ -10,6 +10,7 @@ public class PaintingController : MonoBehaviour
     [SerializeField] List<GameObject> projectilePrefabs;
     [SerializeField] float projectileSpawnInterval = 2.0f;
     [SerializeField] GameObject healthPickupPrefab;
+    [SerializeField] GameObject powerupPickupPrefab;
     [Range(0, 1)] public float dropChance = 0.1f;
 
     float health;
@@ -85,9 +86,20 @@ public class PaintingController : MonoBehaviour
     {
         if (Random.value <= dropChance)
         {
-            if (healthPickupPrefab != null)
+            // 2. Second roll: Health or Powerup?
+            GameObject prefabToSpawn = null;
+
+            if (Random.value <= 0.5f)
             {
-                GameObject loot = Instantiate(healthPickupPrefab, transform.position, Quaternion.identity);
+                prefabToSpawn = powerupPickupPrefab;
+            }
+            else
+            {
+                prefabToSpawn = healthPickupPrefab;
+            }
+            if (prefabToSpawn != null)
+            {
+                GameObject loot = Instantiate(prefabToSpawn, transform.position, Quaternion.identity);
                 Rigidbody rb = loot.GetComponent<Rigidbody>();
 
                 if (rb != null)
@@ -99,4 +111,5 @@ public class PaintingController : MonoBehaviour
             }
         }
     }
+
 }
