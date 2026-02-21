@@ -115,8 +115,8 @@ public class Movement : MonoBehaviour
   
         if (MultiShotPenalty > 0)
         {
-            ShootAtPoint.x += (Random.Range(-MultiShotPenalty, MultiShotPenalty) * penaltyLevel);
-            ShootAtPoint.z += (Random.Range(-MultiShotPenalty, MultiShotPenalty) * penaltyLevel);
+            ShootAtPoint.x += (Random.Range(MultiShotPenalty, MultiShotPenalty) * penaltyLevel);
+            ShootAtPoint.z += (Random.Range(MultiShotPenalty, MultiShotPenalty) * penaltyLevel);
         }
 
         Vector3 GunShootDir = Vector3.Normalize(ShootAtPoint - Gun.position);

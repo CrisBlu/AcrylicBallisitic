@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using PrimeTween;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioPlayer))]
 public class GameManager : MonoBehaviour
@@ -110,7 +111,7 @@ public class GameManager : MonoBehaviour
 
         if(playerHitPoints <= 0)
         {
-            Debug.Log("GameOver");
+            SceneManager.LoadScene(2);
         }
     }
 
@@ -178,7 +179,7 @@ public class GameManager : MonoBehaviour
         spawnTimer += Time.deltaTime;
         spawnInterval -= Time.deltaTime * 0.05f;
 
-        float reticleSize = Mathf.Max(1.0f, player.MultiShotPenalty * player.penaltyLevel);
+        float reticleSize = Mathf.Max(.5f, player.MultiShotPenalty * player.penaltyLevel);
         uiManager.UpdateReticle(reticleSize);
 
         if (previousNetWorth > GetNetWorth())
