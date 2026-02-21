@@ -6,6 +6,11 @@ public class AudioPlayer : MonoBehaviour
 
     public void PlaySound(string name)
     {
+        if (audioAssets == null)
+        {
+            Debug.LogWarning("No audio asset");
+            return;
+        }
         AudioClip clip = audioAssets.GetClipByName(name, out bool enabled);
         if (clip != null && enabled)
         {

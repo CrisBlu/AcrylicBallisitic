@@ -909,8 +909,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DifficultyProgression
   currentDifficulty: 0
-  normalThreshold: 0.99
-  difficultThreshold: 0.33
+  normalThreshold: 0.55
+  difficultThreshold: 0.2
 --- !u!114 &5994850880473005145
 MonoBehaviour:
   m_ObjectHideFlags: 0
