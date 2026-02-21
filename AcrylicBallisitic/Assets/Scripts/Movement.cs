@@ -258,6 +258,7 @@ public class Movement : MonoBehaviour
     public void TriggerPowerUp()
     {
         StartCoroutine(PowerUp());
+        GameManager.GetManager().AmmoPowerUp();
     }
 
 
