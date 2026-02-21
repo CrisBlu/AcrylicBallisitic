@@ -69,6 +69,14 @@ public class HorseProjectile : MonoBehaviour
             SpawnCopy(0);
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            GameManager.GetManager().DamagePlayer();
+        }
+    }
 }
 
 
