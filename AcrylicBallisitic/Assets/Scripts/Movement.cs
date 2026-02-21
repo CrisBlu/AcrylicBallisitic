@@ -95,6 +95,7 @@ public class Movement : MonoBehaviour
     {
         if(!canShoot)
         {
+            Debug.Log("Can't shoot");
             return;
         }
 
