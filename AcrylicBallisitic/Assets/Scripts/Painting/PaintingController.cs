@@ -69,7 +69,7 @@ public class PaintingController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            
+            Debug.Log("hit");
             GameManager.GetManager().DamagePlayer();
         }
     }
