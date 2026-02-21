@@ -1131,7 +1131,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8223159659279054333}
   - component: {fileID: 8905972107930755214}
-  - component: {fileID: 630523848598118003}
   m_Layer: 0
   m_Name: GhostMesh
   m_TagString: Untagged
@@ -1178,23 +1177,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!111 &630523848598118003
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8742991596172488519}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: 5dfaa4162e2ce3d4198e1903efdf3c59, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 5dfaa4162e2ce3d4198e1903efdf3c59, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
 --- !u!1 &8763771306724187867
 GameObject:
   m_ObjectHideFlags: 0

@@ -140,7 +140,11 @@ public class GameManager : MonoBehaviour
 
     public void PlaySound(string name)
     {
-        audioPlayer.PlaySound(name);
+        if (audioPlayer == null)
+        {
+            audioPlayer = GetComponent<AudioPlayer>();
+        }
+        audioPlayer?.PlaySound(name);
     }
 
     bool ShouldSpawn()
@@ -172,6 +176,13 @@ public class GameManager : MonoBehaviour
         difficultyProgression.UpdateDifficulty(1f);
         netWorth = GetMaxNetWorth();
         audioPlayer = GetComponent<AudioPlayer>();
+    }
+
+    void OnDestroy()
+    {
+        InputSystem.actions.Disable();
+        instance = null;
+        Tween.StopAll();
     }
 
     void Update()

@@ -40,9 +40,11 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         wallCheck = LayerMask.GetMask("Wall");
-        
-        
-        
+    }
+
+    void OnDestroy()
+    {
+        attack.performed -= Shoot;
     }
 
     void FixedUpdate()

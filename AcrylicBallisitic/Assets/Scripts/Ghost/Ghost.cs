@@ -63,8 +63,11 @@ public class Ghost : MonoBehaviour
 
         Vector3 toPlayer = game.GetPlayerPosition() - transform.position;
         toPlayer.y = 0.0f;
-        Quaternion rotation = Quaternion.LookRotation(toPlayer);
-        transform.rotation = rotation;
+        if (toPlayer != Vector3.zero)
+        {
+            Quaternion rotation = Quaternion.LookRotation(toPlayer);
+            transform.rotation = rotation;
+        }
         
         switch (currentState)
         {
