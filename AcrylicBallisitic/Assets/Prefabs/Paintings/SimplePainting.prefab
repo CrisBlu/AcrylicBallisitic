@@ -67,6 +67,7 @@ MonoBehaviour:
   - {fileID: 5491916927107671022, guid: d65dd32dfb147024686244d28c7c739c, type: 3}
   projectileSpawnInterval: 2
   healthPickupPrefab: {fileID: 8512744933115948769, guid: ede10bbe1bb3324429df7607461f41dd, type: 3}
+  powerupPickupPrefab: {fileID: 2276470627857686489, guid: 41fd1831ab971b344a1de5cf4a940a8a, type: 3}
   dropChance: 0.1
 --- !u!65 &7537039079006474347
 BoxCollider:
