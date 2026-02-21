@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
         if (ShouldSpawn())
         {
             int randomIndex = Random.Range(0, paintings.Count);
-            while (randomIndex == lastSpawnIndex)
+            while (paintings.Count > 1 && randomIndex == lastSpawnIndex)
             {
                 randomIndex = Random.Range(0, paintings.Count);
             }
