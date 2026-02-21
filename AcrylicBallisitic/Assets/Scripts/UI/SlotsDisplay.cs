@@ -1,11 +1,21 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SlotsDisplay : MonoBehaviour
 {
+    public enum SlotType
+    {
+        Full,
+        Empty,
+        Special
+    }
+
     [SerializeField] GameObject slotPrefab;
+    [SerializeField] Dictionary<SlotType, Sprite> slotSprites;
     [SerializeField] Sprite fullSlotSprite;
     [SerializeField] Sprite emptySlotSprite;
+    [SerializeField] Sprite specialSlotSprite;
     [SerializeField] int maxSlots = 6;
 
     GameObject[] slots;
