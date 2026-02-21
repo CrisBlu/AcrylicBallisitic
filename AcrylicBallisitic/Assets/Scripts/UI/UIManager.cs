@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.Rendering;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,6 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] SlotsDisplay ammoDisplay;
     [SerializeField] Slider netWorthSlider;
     [SerializeField] Slider netWorthDamageSlider;
+    [SerializeField] Image reticle;
 
     public void UpdatePlayerHitPoints(int hitPoints)
     {
@@ -38,6 +38,12 @@ public class UIManager : MonoBehaviour
         netWorthDamageSliderRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, end - start);
         netWorthDamageSliderRect.anchoredPosition = new Vector2((end + start) / 2, netWorthDamageSliderRect.anchoredPosition.y);
         netWorthDamageSlider.value = 1.0f;
+    }
+
+    public void UpdateReticle(float size)
+    {
+        reticle.transform.position = Input.mousePosition;
+        reticle.transform.localScale = new Vector3(size, size, size);
     }
 
     void Start()
