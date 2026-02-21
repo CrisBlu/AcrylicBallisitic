@@ -18,9 +18,9 @@ public class Ghost : MonoBehaviour
     public float maxAttackInterval = 15f;
     public float fuseTime = 2.5f;
 
-    [Header("Area Settings")]
-    public float minSpawnDist = 0f;
-    public float maxSpawnDist = 3f;
+    // [Header("Area Settings")]
+    // public float minSpawnDist = 0f;
+    // public float maxSpawnDist = 3f;
 
     [SerializeField] GameObject blastIndicatorPrefab;
     [SerializeField] GameObject blastEffectPrefab;
@@ -60,6 +60,11 @@ public class Ghost : MonoBehaviour
             indicator.SetActive(!indicator.activeSelf);
             flashInterval = 0.25f;
         }
+
+        Vector3 toPlayer = game.GetPlayerPosition() - transform.position;
+        toPlayer.y = 0.0f;
+        Quaternion rotation = Quaternion.LookRotation(toPlayer);
+        transform.rotation = rotation;
         
         switch (currentState)
         {
@@ -70,9 +75,9 @@ public class Ghost : MonoBehaviour
                 }
                 else
                 {
-                    Vector2 randomCircle = Random.insideUnitCircle.normalized * Random.Range(minSpawnDist, maxSpawnDist);
-                    Vector3 targetPos = game.GetPlayerPosition() + new Vector3(randomCircle.x, 0, randomCircle.y);
-
+                    // Vector2 randomCircle = Random.insideUnitCircle.normalized * Random.Range(minSpawnDist, maxSpawnDist);
+                    // Vector3 targetPos = game.GetPlayerPosition() + new Vector3(randomCircle.x, 0, randomCircle.y);
+                    Vector3 targetPos = game.GetPlayerPosition();
                     transform.position = new Vector3(targetPos.x, transform.position.y, targetPos.z);
                     endPosition = transform.position + Vector3.up * 15.0f;
 
