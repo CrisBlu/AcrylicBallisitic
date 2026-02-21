@@ -46,7 +46,7 @@ public class JumpPaintingMovement : PaintingMovement
         else if (distance <= 45.0f) extraSpins = 2;
         else extraSpins = 3;
 
-        Tween.PositionAtSpeed(transform, targetPosition, jumpSpeed, Ease.InOutCubic)
+        Tween.PositionAtSpeed(transform, targetPosition, jumpSpeed, Ease.InOutExpo)
         .OnUpdate(transform, (target, tween) =>
         {
             Quaternion currentRot = Quaternion.LookRotation(-normal);
