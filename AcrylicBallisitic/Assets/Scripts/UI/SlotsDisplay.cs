@@ -29,9 +29,13 @@ public class SlotsDisplay : MonoBehaviour
             {
                 slotImages[i].sprite = fullSlotSprite;
             }
-            else
+            else if(slots[i] == Ammo.Miss)
             {
                 slotImages[i].sprite = emptySlotSprite;
+            }
+            else if (slots[i] == Ammo.Hit)
+            {
+                slotImages[i].sprite = specialSlotSprite;
             }
         }
     }
