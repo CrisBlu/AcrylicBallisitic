@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] DifficultyProgression difficultyProgression;
     [SerializeField] Movement player;
 
+    [Header("Game Settings")]
+    [SerializeField] float maxNetWorth = 900.0f;
+
     public PaintingMovementArea GetMovementArea() { return movementArea; }
 
     public Vector3 GetPlayerPosition() { return player.transform.position; } // TODO: implement player tracking
@@ -32,6 +35,7 @@ public class GameManager : MonoBehaviour
     static public GameManager GetManager() { return instance; }
     static GameManager instance;
 
+    float netWorth = 0.0f;
     float previousNetWorth = 0.0f;
     bool isDamageCleared = true;
     bool isDamageDecaying = false;
@@ -51,26 +55,36 @@ public class GameManager : MonoBehaviour
 
     public float GetNetWorth()
     {
-        float total = 0.0f;
-        foreach (PaintingController painting in paintings)
-        {
-            total += painting.GetHealth();
-        }
-        return total;
+        // float total = 0.0f;
+        // foreach (PaintingController painting in paintings)
+        // {
+        //     total += painting.GetHealth();
+        // }
+        // return total;
+        return netWorth;
     }
 
     public float GetMaxNetWorth()
     {
-        float total = 0.0f;
-        foreach (PaintingController painting in paintings)
-        {
-            total += painting.GetMaxHealth();
-        }
-        return total;
+        // float total = 0.0f;
+        // foreach (PaintingController painting in paintings)
+        // {
+        //     total += painting.GetMaxHealth();
+        // }
+        // return total;
+        return maxNetWorth;
     }
     
     public void NotifyDamageDealt(float damage)
     {
+        netWorth = Mathf.Max(0.0f, netWorth - damage);
+        if (netWorth <= 0.0f)
+        {
+            print("Player wins!");
+            // TODO: end game
+            return;
+        }
+
         if (isDamageCleared)
         {
             isDamageCleared = false;
@@ -127,7 +141,6 @@ public class GameManager : MonoBehaviour
                 activeCount++;
             }
         }
-        print(activeCount + " / " + difficultyProgression.GetSpawnCount());
         return activeCount < difficultyProgression.GetSpawnCount();
     }
 
@@ -144,6 +157,7 @@ public class GameManager : MonoBehaviour
         uiManager.UpdatePlayerHitPoints(playerHitPoints);
         uiManager.UpdatePlayerAmmo(playerAmmo);
         difficultyProgression.UpdateDifficulty(1f);
+        netWorth = GetMaxNetWorth();
     }
 
     void Update()
@@ -151,7 +165,7 @@ public class GameManager : MonoBehaviour
         spawnTimer += Time.deltaTime;
         spawnInterval -= Time.deltaTime * 0.05f;
 
-        float reticleSize = Mathf.Max(0.5f, player.MultiShotPenalty * player.penaltyLevel);
+        float reticleSize = Mathf.Max(1.0f, player.MultiShotPenalty * player.penaltyLevel);
         uiManager.UpdateReticle(reticleSize);
 
         if (previousNetWorth > GetNetWorth())
@@ -192,6 +206,12 @@ public class GameManager : MonoBehaviour
             paintings[randomIndex].Spawn();
             lastSpawnIndex = randomIndex;
         }
+    }
+
+    public void HealPlayer()
+    {
+        playerHitPoints = Mathf.Max(0, playerHitPoints + 1);
+        uiManager.UpdatePlayerHitPoints(playerHitPoints);
     }
 }
 

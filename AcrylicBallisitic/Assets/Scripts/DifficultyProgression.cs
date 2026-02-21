@@ -11,6 +11,8 @@ public class DifficultyProgression : MonoBehaviour
     }
 
     public DifficultyLevel currentDifficulty = DifficultyLevel.Easy;
+    public float normalThreshold = 0.66f;
+    public float difficultThreshold = 0.33f;
 
     static readonly Dictionary<DifficultyLevel, int> spawnCounts = new Dictionary<DifficultyLevel, int>()
     {
@@ -28,10 +30,9 @@ public class DifficultyProgression : MonoBehaviour
 
     public void UpdateDifficulty(float netWorthRatio)
     {
-        print("Updating difficulty with net worth ratio: " + netWorthRatio);
         DifficultyLevel newDifficulty;
-        if (netWorthRatio < 0.33f) newDifficulty = DifficultyLevel.Difficult;
-        else if (netWorthRatio < 0.66f) newDifficulty = DifficultyLevel.Normal;
+        if (netWorthRatio < difficultThreshold) newDifficulty = DifficultyLevel.Difficult;
+        else if (netWorthRatio < normalThreshold) newDifficulty = DifficultyLevel.Normal;
         else newDifficulty = DifficultyLevel.Easy;
 
         if (newDifficulty != currentDifficulty)
