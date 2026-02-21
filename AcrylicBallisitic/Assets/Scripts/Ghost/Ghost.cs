@@ -1,6 +1,6 @@
 using UnityEngine;
-using System.Collections;
 using PrimeTween;
+using System.Collections;
 
 public class Ghost : MonoBehaviour
 {
@@ -31,7 +31,7 @@ public class Ghost : MonoBehaviour
     State currentState = State.Disabled;
     Vector3 endPosition;
     GameObject indicator;
-    float flashInterval = 0.25f;
+    float flashInterval = 0.35f;
 
     void OnDifficultyChanged(DifficultyChangedEvent evt)
     {
@@ -58,7 +58,7 @@ public class Ghost : MonoBehaviour
         if (indicator != null && flashInterval <= 0f)
         {
             indicator.SetActive(!indicator.activeSelf);
-            flashInterval = 0.25f;
+            flashInterval = 0.35f;
         }
 
         Vector3 toPlayer = game.GetPlayerPosition() - transform.position;
@@ -82,12 +82,13 @@ public class Ghost : MonoBehaviour
                     endPosition = transform.position + Vector3.up * 15.0f;
 
                     currentState = State.Emerging;
-                    Tween.PositionAtSpeed(transform, endPosition, 2.5f, Ease.InOutCubic).OnComplete(() =>
+                    Tween.Position(transform, endPosition, 2.5f, Ease.InOutCubic).OnComplete(() =>
                     {
-                        IndicateAttack();
                         currentState = State.Fusing;
+                        IndicateAttack();
                         fuseTimer = fuseTime;
                     });
+                    StartCoroutine(DelayEnterSound());
                 }
                 break;
             case State.Emerging:
@@ -99,8 +100,7 @@ public class Ghost : MonoBehaviour
                 }
                 else
                 {
-                    Attack();
-                    currentState = State.Disappearing;
+                    StartCoroutine(Attack());
                     endPosition = transform.position + Vector3.down * 15.0f;
                     Tween.PositionAtSpeed(transform, endPosition, 2.5f, Ease.InOutCubic).OnComplete(() =>
                     {
@@ -120,12 +120,18 @@ public class Ghost : MonoBehaviour
     {
         if (blastIndicatorPrefab != null)
         {
-            indicator = Instantiate(blastIndicatorPrefab, transform.position, Quaternion.identity);
-            flashInterval = 0.25f;
+            indicator = Instantiate(blastIndicatorPrefab, transform.position, Quaternion.identity, transform);
+            flashInterval = 0.35f;
         }
     }
 
-    void Attack()
+    IEnumerator DelayEnterSound()
+    {
+        yield return new WaitForSeconds(1.35f);
+        game.PlaySound("GHOST_ENTER");
+    }
+
+    IEnumerator Attack()
     {
         if (indicator != null)
         {
@@ -135,6 +141,12 @@ public class Ghost : MonoBehaviour
         {
             Instantiate(blastEffectPrefab, transform.position, Quaternion.identity);
         }
+        game.PlaySound("GHOST_ATTACK");
+        currentState = State.Disappearing;
+
+        yield return new WaitForSeconds(2.05f);
+        game.PlaySound("GHOST_LEAVE");
+        
     }
 }
 

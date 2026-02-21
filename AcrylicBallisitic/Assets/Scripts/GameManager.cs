@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(AudioPlayer))]
 public class GameManager : MonoBehaviour
 {
+    [Header("Gameplay")]
     [SerializeField] List<PaintingController> paintings;
     [SerializeField] PaintingMovementArea movementArea;
     [SerializeField] UIManager uiManager;
@@ -35,6 +37,8 @@ public class GameManager : MonoBehaviour
     
     static public GameManager GetManager() { return instance; }
     static GameManager instance;
+
+    AudioPlayer audioPlayer;
 
     float netWorth = 0.0f;
     float previousNetWorth = 0.0f;
@@ -131,6 +135,14 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //******************************************************
+    // Audio
+
+    public void PlaySound(string name)
+    {
+        audioPlayer.PlaySound(name);
+    }
+
     bool ShouldSpawn()
     {
         if (Input.GetKeyDown(KeyCode.Space)) return true;
@@ -159,6 +171,7 @@ public class GameManager : MonoBehaviour
         uiManager.UpdatePlayerAmmo(playerAmmo);
         difficultyProgression.UpdateDifficulty(1f);
         netWorth = GetMaxNetWorth();
+        audioPlayer = GetComponent<AudioPlayer>();
     }
 
     void Update()

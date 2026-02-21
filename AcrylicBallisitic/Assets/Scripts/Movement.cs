@@ -14,10 +14,11 @@ public class Movement : MonoBehaviour
     [SerializeField] Transform Gun;
     [SerializeField] GameObject BulletFX;
 
-
     //Called or will need to be called in different script, maybe player stats SO or Static is needed
     [SerializeField] public float MultiShotPenalty = .5f;
     [HideInInspector] public int penaltyLevel = 0;
+
+    [SerializeField] Animator animator;
 
     private InputAction movement;
     private Rigidbody rb;
@@ -27,10 +28,8 @@ public class Movement : MonoBehaviour
     Vector3 LookVec;
     private bool canShoot = true;
 
-
     LayerMask wallCheck;
     
-
     void Start()
     {
         movement = InputSystem.actions.FindAction("Move");
@@ -70,6 +69,15 @@ public class Movement : MonoBehaviour
             }
         }
 
+        if (directionv3 != Vector3.zero)
+        {
+            animator.SetBool("isMoving", true);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
+        }
+
         rb.MovePosition(rb.position + directionv3 * Speed * Time.deltaTime);
 
         //Rotation to look at cursor
@@ -95,10 +103,11 @@ public class Movement : MonoBehaviour
     {
         if(!canShoot)
         {
+            Debug.Log("Can't shoot");
             return;
         }
 
-        
+        GameManager.GetManager().PlaySound("PLAYER_SHOOT");
 
         //Will shoot past the cursor location and hit anything behind, can limit range to where was click if needed
 
@@ -214,7 +223,7 @@ public class Movement : MonoBehaviour
 
         canShoot = true;
         
-
+        GameManager.GetManager().PlaySound("PLAYER_RELOAD");
         
     }
 
