@@ -4236,6 +4236,10 @@ PrefabInstance:
       propertyPath: dropChance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6787822735432115921, guid: b7052bcc02ea619418f2553a9cef00dd, type: 3}
+      propertyPath: powerupPickupPrefab
+      value: 
+      objectReference: {fileID: 2276470627857686489, guid: 41fd1831ab971b344a1de5cf4a940a8a, type: 3}
     - target: {fileID: 6884668216988509465, guid: b7052bcc02ea619418f2553a9cef00dd, type: 3}
       propertyPath: m_Name
       value: JumpPainting
@@ -4923,6 +4927,10 @@ PrefabInstance:
       propertyPath: dropChance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6885493469477037219, guid: a08dff5cba624a048ad6766dfd60a626, type: 3}
+      propertyPath: powerupPickupPrefab
+      value: 
+      objectReference: {fileID: 2276470627857686489, guid: 41fd1831ab971b344a1de5cf4a940a8a, type: 3}
     - target: {fileID: 7776158949654579968, guid: a08dff5cba624a048ad6766dfd60a626, type: 3}
       propertyPath: m_Name
       value: NoMovePainting
@@ -5719,6 +5727,7 @@ MonoBehaviour:
   BulletFX: {fileID: 4208113292044221059, guid: 61a3362513e29294ba62209714047b69, type: 3}
   MultiShotPenalty: 1
   penaltyLevel: 0
+  PowerupDuration: 3.5
   animator: {fileID: 1881789588}
 --- !u!4 &5118248912344058848
 Transform:
@@ -6051,6 +6060,10 @@ PrefabInstance:
       propertyPath: dropChance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6797540349570997634, guid: ae8e4b0530be6964889c09da159ed666, type: 3}
+      propertyPath: powerupPickupPrefab
+      value: 
+      objectReference: {fileID: 2276470627857686489, guid: 41fd1831ab971b344a1de5cf4a940a8a, type: 3}
     - target: {fileID: 7284408043877546218, guid: ae8e4b0530be6964889c09da159ed666, type: 3}
       propertyPath: m_Name
       value: SimplePainting
