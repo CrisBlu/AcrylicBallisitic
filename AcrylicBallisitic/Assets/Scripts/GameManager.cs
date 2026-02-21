@@ -208,61 +208,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    bool ShouldSpawn()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) return true;
-        int activeCount = 0;
-        foreach (PaintingController painting in paintings)
-        {
-            if (painting.GetComponent<PaintingMovement>().GetState() != PaintingMovement.State.None)
-            {
-                activeCount++;
-            }
-        }
-
-        if (activeCount == 0) return true;
-        else if (activeCount == 1)
-        {
-            return spawnTimer >= spawnInterval;
-        }
-        return false;
-    }
-
-    public void DamagePlayer()
-    {
-        playerHitPoints = Mathf.Max(0, playerHitPoints - 1);
-        uiManager.UpdatePlayerHitPoints(playerHitPoints);
-
-        if(playerHitPoints <= 0)
-        {
-            Debug.Log("GameOver");
-        }
-    }
-
     public void HealPlayer()
     {
         playerHitPoints = Mathf.Max(0, playerHitPoints + 1);
         uiManager.UpdatePlayerHitPoints(playerHitPoints);
-    }
-
-    public void UpdateBullets(Ammo[] playerAmmo)
-    {
-        uiManager.UpdatePlayerAmmo(playerAmmo);
-    }
-
-    public void UseBullet(bool hit)
-    {
-        playerAmmo[iBullet] = hit ? Ammo.Hit : Ammo.Miss;
-        iBullet--;
-        uiManager.UpdatePlayerAmmo(playerAmmo);
-    }
-
-    public void ReloadBullet()
-    {
-        iBullet++;
-        playerAmmo[iBullet] = Ammo.Loaded;
-        uiManager.UpdatePlayerAmmo(playerAmmo);
-
     }
 }
 
