@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,10 +8,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<PaintingController> paintings;
     [SerializeField] PaintingMovementArea movementArea;
     [SerializeField] UIManager uiManager;
+    [SerializeField] Movement player;
 
     public PaintingMovementArea GetMovementArea() { return movementArea; }
 
-    public Vector3 GetPlayerPosition() { return Vector3.zero; } // TODO: implement player tracking
+    public Vector3 GetPlayerPosition() { return player.transform.position; } // TODO: implement player tracking
     public int GetPlayerHitPoints() { return playerHitPoints; } // TODO: implement player hit points tracking
     public Ammo[] GetPlayerAmmo() { return playerAmmo; } 
 
@@ -133,12 +135,6 @@ public class GameManager : MonoBehaviour
             lastSpawnIndex = randomIndex;
         }
 
-        // Debug
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            playerHitPoints = Mathf.Max(0, playerHitPoints - 1);
-            uiManager.UpdatePlayerHitPoints(playerHitPoints);
-        }
 
     }
 
@@ -150,6 +146,13 @@ public class GameManager : MonoBehaviour
             if (painting.GetComponent<PaintingMovement>().GetState() != PaintingMovement.State.None) return false;
         }
         return true;
+    }
+
+    public void DamagePlayer()
+    {
+        
+        playerHitPoints = Mathf.Max(0, playerHitPoints - 1);
+        uiManager.UpdatePlayerHitPoints(playerHitPoints);
     }
 
     public void UpdateBullets(Ammo[] playerAmmo)
