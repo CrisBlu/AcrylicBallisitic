@@ -530,7 +530,7 @@ GameObject:
   - component: {fileID: 550082105}
   - component: {fileID: 550082104}
   - component: {fileID: 550082103}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -642,7 +642,7 @@ GameObject:
   - component: {fileID: 978484450}
   - component: {fileID: 978484449}
   - component: {fileID: 978484448}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -768,7 +768,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5063194368897216238, guid: cba0767e85f43fb4984f4faca5ee3554, type: 3}
       propertyPath: MultiShotPenalty
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5118248912308694140, guid: cba0767e85f43fb4984f4faca5ee3554, type: 3}
       propertyPath: m_LocalScale.x
@@ -1447,7 +1447,7 @@ GameObject:
   - component: {fileID: 1834610077}
   - component: {fileID: 1834610076}
   - component: {fileID: 1834610075}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1559,7 +1559,7 @@ GameObject:
   - component: {fileID: 1882132906}
   - component: {fileID: 1882132905}
   - component: {fileID: 1882132904}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2312,6 +2312,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5413638204939674783, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: specialSlotSprite
+      value: 
+      objectReference: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5674466145031655022, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
       propertyPath: m_Name
       value: GameManager
