@@ -72,5 +72,9 @@ public class PaintingController : MonoBehaviour
             Debug.Log("hit");
             GameManager.GetManager().DamagePlayer();
         }
+         else if (other.GetComponent<Furniture>() != null)
+        {
+            other.GetComponent<Furniture>().DoDamage();
+        }
     }
 }

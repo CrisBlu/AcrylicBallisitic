@@ -54,6 +54,7 @@ public class PaintingMovementArea : MonoBehaviour
             closestDist = dist;
             closestPoint = point;
             outNormal = Vector3.left;
+            closestPoint.z = Mathf.Clamp(closestPoint.z, min.z + padding, max.z - padding);
         }
         
         // Left face (-X)
@@ -63,6 +64,7 @@ public class PaintingMovementArea : MonoBehaviour
             closestDist = dist;
             closestPoint = point;
             outNormal = Vector3.right;
+            closestPoint.z = Mathf.Clamp(closestPoint.z, min.z + padding, max.z - padding);
         }
         
         // Forward face (+Z)
@@ -72,6 +74,7 @@ public class PaintingMovementArea : MonoBehaviour
             closestDist = dist;
             closestPoint = point;
             outNormal = Vector3.back;
+            closestPoint.x = Mathf.Clamp(closestPoint.x, min.x + padding, max.x - padding);
         }
         
         // Back face (-Z)
@@ -81,6 +84,7 @@ public class PaintingMovementArea : MonoBehaviour
             closestDist = dist;
             closestPoint = point;
             outNormal = Vector3.forward;
+            closestPoint.x = Mathf.Clamp(closestPoint.x, min.x + padding, max.x - padding);
         }
         return closestPoint;
     }

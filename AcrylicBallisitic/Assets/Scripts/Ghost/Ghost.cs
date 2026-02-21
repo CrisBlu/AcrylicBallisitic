@@ -1,0 +1,95 @@
+using UnityEngine;
+using System.Collections;
+using PrimeTween;
+
+public class Ghost : MonoBehaviour
+{
+    enum State
+    {
+        Idle,
+        Emerging,
+        Fusing,
+        Disappearing
+    }
+
+    [Header("Timing")]
+    public float minAttackInterval = 8f;
+    public float maxAttackInterval = 15f;
+    public float fuseTime = 1.5f;
+
+    [Header("Area Settings")]
+    public float minSpawnDist = 0f;
+    public float maxSpawnDist = 3f;
+
+    [SerializeField] GameObject blastEffectPrefab;
+
+    GameManager game;
+    float attackTimer = 0f;
+    float fuseTimer = 0f;
+    State currentState = State.Idle;
+    Vector3 endPosition;
+
+    void Start()
+    {
+        game = GameManager.GetManager();
+        attackTimer = Random.Range(minAttackInterval, maxAttackInterval);
+    }
+
+    void Update()
+    {
+        switch (currentState)
+        {
+            case State.Idle:
+                if (attackTimer > 0)
+                {
+                    attackTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    Vector2 randomCircle = Random.insideUnitCircle.normalized * Random.Range(minSpawnDist, maxSpawnDist);
+                    Vector3 targetPos = game.GetPlayerPosition() + new Vector3(randomCircle.x, 0, randomCircle.y);
+
+                    transform.position = new Vector3(targetPos.x, transform.position.y, targetPos.z);
+                    endPosition = transform.position + Vector3.up * 15.0f;
+
+                    currentState = State.Emerging;
+                    Tween.PositionAtSpeed(transform, endPosition, 2.5f, Ease.InOutCubic).OnComplete(() =>
+                    {
+                        currentState = State.Fusing;
+                        fuseTimer = fuseTime;
+                    });
+                }
+                break;
+            case State.Emerging:
+                break;
+            case State.Fusing:
+                if (fuseTimer > 0)
+                {
+                    fuseTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    Attack();
+                    currentState = State.Disappearing;
+                    endPosition = transform.position + Vector3.down * 15.0f;
+                    Tween.PositionAtSpeed(transform, endPosition, 2.5f, Ease.InOutCubic).OnComplete(() =>
+                    {
+                        currentState = State.Idle;
+                        attackTimer = Random.Range(minAttackInterval, maxAttackInterval);
+                    });
+                }
+                break;
+            case State.Disappearing:
+                break;
+        }
+    }
+
+    void Attack()
+    {
+        if (blastEffectPrefab != null)
+        {
+            Instantiate(blastEffectPrefab, transform.position, Quaternion.identity);
+        }
+    }
+}
+
