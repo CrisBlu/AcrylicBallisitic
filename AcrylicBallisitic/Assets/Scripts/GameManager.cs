@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
 
         if(playerHitPoints <= 0)
         {
-            SceneManager.LoadScene("2");
+            SceneManager.LoadScene(2);
         }
     }
 
