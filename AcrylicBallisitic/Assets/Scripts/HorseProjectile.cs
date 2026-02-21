@@ -32,7 +32,14 @@ public class HorseProjectile : MonoBehaviour
         {
             ExecuteBehavior();
         }
-        
+        if (ProjectileType == ProjectileType.Single)
+        {
+            GameManager.GetManager().PlaySound("HORSE_PROJECTILE");
+        }
+        else
+        {
+            GameManager.GetManager().PlaySound("PROJECTILE");
+        }
     }
 
     void Update()

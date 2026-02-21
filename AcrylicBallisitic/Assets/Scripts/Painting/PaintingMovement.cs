@@ -37,6 +37,8 @@ public class PaintingMovement : MonoBehaviour
         {
             Idle();
         });
+
+        game.PlaySound("PAINTING_ENTER");
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -100,6 +102,8 @@ public class PaintingMovement : MonoBehaviour
         {
             state = State.None;
         });
+
+        game.PlaySound("PAINTING_EXIT");
     }
 
     void OnDrawGizmos()

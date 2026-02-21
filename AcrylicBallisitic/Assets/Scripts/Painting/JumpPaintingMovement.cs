@@ -34,6 +34,8 @@ public class JumpPaintingMovement : PaintingMovement
         //     randomPosition = game.GetMovementArea().GetRandomPosition(out randomNormal);
         // }
 
+        game.PlaySound("BRONZE_ATTACK");
+
         Vector3 playerPosition = game.GetPlayerPosition();
         Vector3 toPlayer = playerPosition - transform.position;
         toPlayer.y = 0.0f;
