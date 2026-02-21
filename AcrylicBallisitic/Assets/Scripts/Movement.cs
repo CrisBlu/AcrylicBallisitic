@@ -44,11 +44,12 @@ public class Movement : MonoBehaviour
         
     }
 
-    void Update()
+    void FixedUpdate()
     {
         //Movement
         direction = movement.ReadValue<Vector2>();
         Vector3 directionv3 = new Vector3(direction.x, 0, direction.y);
+
         rb.MovePosition(rb.position + directionv3 * Speed * Time.deltaTime);
 
         //Rotation to look at cursor
@@ -97,8 +98,20 @@ public class Movement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100))
         {
+            //Determine Target and Deal Damage if Enemy
+            bool hitSomething;
+            if(hit.collider.CompareTag("Enemy"))
+            {
+                hitSomething = true;
+                hit.collider.gameObject.GetComponent<PaintingController>().DoDamage(10);
+            }
+            else
+            {
+                hitSomething = false;
+            }
+
             //Shooting
-            GameManager.GetManager().UseBullet(true);
+            GameManager.GetManager().UseBullet(hitSomething);
             if(GameManager.GetManager().GetPlayerAmmoCount() == 0)
             {
                 canShoot = false;
@@ -117,9 +130,10 @@ public class Movement : MonoBehaviour
             penaltyLevel++;
             penaltyTimer = PenaltyDuration;
 
+
+
+
             
-
-
         }
         else
         {

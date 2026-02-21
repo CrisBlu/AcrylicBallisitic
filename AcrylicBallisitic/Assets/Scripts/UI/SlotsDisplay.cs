@@ -36,10 +36,21 @@ public class SlotsDisplay : MonoBehaviour
         }
     }
 
-    public void SetSlot(int index, SlotType type)
+    public void SetHealth(int hpCount)
     {
-        if (index < 0 || index >= maxSlots) return;
-        slotImages[index].sprite = slotSprites[type];
+        
+        for (int i = 0; i < maxSlots; i++)
+        {
+            if (i < hpCount)
+            {
+                slotImages[i].sprite = fullSlotSprite;
+            }
+            else
+            {
+                slotImages[i].sprite = emptySlotSprite;
+            }
+        }
+
     }
 
     void Start()
