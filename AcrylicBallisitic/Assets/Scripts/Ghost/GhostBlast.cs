@@ -4,26 +4,15 @@ using UnityEngine;
 public class GhostBlast : MonoBehaviour
 {
     [SerializeField] float blastRadiusMultiplier = 1.25f;
-    [SerializeField] float damage = 20f;
-    [SerializeField] float flashInterval = 0.1f;
-
-    private MeshRenderer meshRenderer;
+    // [SerializeField] float damage = 20f;
+    // [SerializeField] float flashInterval = 0.1f;
 
     void Start()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
-
-        Tween tween = Tween.Custom(0f, 1f, flashInterval, (_) => {
-            if (Random.value > 0.85f)
-            {
-                meshRenderer.enabled = !meshRenderer.enabled;
-            }
-        }, Ease.Linear, -1, CycleMode.Yoyo);
-        
+        transform.localScale = transform.localScale / blastRadiusMultiplier;
         Tween.Scale(transform, transform.localScale * blastRadiusMultiplier, 1.0f, Ease.OutCubic).OnComplete(() =>
         {
             Destroy(gameObject);
-            tween.Stop();
         });
     }
 

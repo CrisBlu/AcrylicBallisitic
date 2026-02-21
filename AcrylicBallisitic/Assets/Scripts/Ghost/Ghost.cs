@@ -16,12 +16,13 @@ public class Ghost : MonoBehaviour
     [Header("Timing")]
     public float minAttackInterval = 8f;
     public float maxAttackInterval = 15f;
-    public float fuseTime = 1.5f;
+    public float fuseTime = 2.5f;
 
     [Header("Area Settings")]
     public float minSpawnDist = 0f;
     public float maxSpawnDist = 3f;
 
+    [SerializeField] GameObject blastIndicatorPrefab;
     [SerializeField] GameObject blastEffectPrefab;
 
     GameManager game;
@@ -29,6 +30,8 @@ public class Ghost : MonoBehaviour
     float fuseTimer = 0f;
     State currentState = State.Disabled;
     Vector3 endPosition;
+    GameObject indicator;
+    float flashInterval = 0.25f;
 
     void OnDifficultyChanged(DifficultyChangedEvent evt)
     {
@@ -51,6 +54,13 @@ public class Ghost : MonoBehaviour
 
     void Update()
     {
+        flashInterval -= Time.deltaTime;
+        if (indicator != null && flashInterval <= 0f)
+        {
+            indicator.SetActive(!indicator.activeSelf);
+            flashInterval = 0.25f;
+        }
+        
         switch (currentState)
         {
             case State.Idle:
@@ -69,6 +79,7 @@ public class Ghost : MonoBehaviour
                     currentState = State.Emerging;
                     Tween.PositionAtSpeed(transform, endPosition, 2.5f, Ease.InOutCubic).OnComplete(() =>
                     {
+                        IndicateAttack();
                         currentState = State.Fusing;
                         fuseTimer = fuseTime;
                     });
@@ -100,8 +111,21 @@ public class Ghost : MonoBehaviour
         }
     }
 
+    void IndicateAttack()
+    {
+        if (blastIndicatorPrefab != null)
+        {
+            indicator = Instantiate(blastIndicatorPrefab, transform.position, Quaternion.identity);
+            flashInterval = 0.25f;
+        }
+    }
+
     void Attack()
     {
+        if (indicator != null)
+        {
+            Destroy(indicator);
+        }
         if (blastEffectPrefab != null)
         {
             Instantiate(blastEffectPrefab, transform.position, Quaternion.identity);
