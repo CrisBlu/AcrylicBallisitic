@@ -30,7 +30,6 @@ public class DifficultyProgression : MonoBehaviour
 
     public void UpdateDifficulty(float netWorthRatio)
     {
-        print("Updating difficulty with net worth ratio: " + netWorthRatio);
         DifficultyLevel newDifficulty;
         if (netWorthRatio < difficultThreshold) newDifficulty = DifficultyLevel.Difficult;
         else if (netWorthRatio < normalThreshold) newDifficulty = DifficultyLevel.Normal;
