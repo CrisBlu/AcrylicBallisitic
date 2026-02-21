@@ -867,7 +867,7 @@ GameObject:
   - component: {fileID: 1274894048}
   m_Layer: 0
   m_Name: JumpPainting
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -979,6 +979,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintingController
   maxHealth: 300
+  projectilePrefabs: []
+  projectileSpawnInterval: 2
 --- !u!114 &1274894048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1189,7 +1191,7 @@ GameObject:
   - component: {fileID: 1667131355}
   m_Layer: 0
   m_Name: NoMovePainting
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1207,6 +1209,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintingController
   maxHealth: 300
+  projectilePrefabs: []
+  projectileSpawnInterval: 2
 --- !u!65 &1667131351
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1702,6 +1706,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintingController
   maxHealth: 300
+  projectilePrefabs: []
+  projectileSpawnInterval: 2
 --- !u!54 &1906696252
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2079,7 +2085,7 @@ GameObject:
   - component: {fileID: 2117269382}
   m_Layer: 0
   m_Name: SimplePainting
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2097,6 +2103,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintingController
   maxHealth: 300
+  projectilePrefabs: []
+  projectileSpawnInterval: 2
 --- !u!65 &2117269378
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2308,6 +2316,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6582942082022989577, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1216361246}
     - target: {fileID: 6582942082022989577, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
       propertyPath: movementArea
       value: 

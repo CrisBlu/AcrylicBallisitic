@@ -75,7 +75,6 @@ public class Movement : MonoBehaviour
     {
         if(!canShoot)
         {
-            Debug.Log("Out of Ammo");
             return;
         }
 
@@ -104,11 +103,13 @@ public class Movement : MonoBehaviour
             {
                 hitSomething = true;
                 hit.collider.gameObject.GetComponent<PaintingController>().DoDamage(10);
+                
             }
             else
             {
                 hitSomething = false;
             }
+
 
             //Shooting
             GameManager.GetManager().UseBullet(hitSomething);
@@ -160,9 +161,23 @@ public class Movement : MonoBehaviour
     public async void Reload()
     {
         float timer = 0;
-        float reloadTimePerBullet = ReloadTime / 6;
+        bool perfectRound = true;
+
+        //Reload faster if all bullets are marked as hits
+        Ammo[] playerAmmo = GameManager.GetManager().GetPlayerAmmo();
+        foreach(Ammo shot in playerAmmo)
+        {
+            if(shot == Ammo.Miss)
+            {
+                perfectRound = false;
+                break;
+            }
+        }
+
+
+        float reloadTimePerBullet = perfectRound ? .5f/6 : ReloadTime / 6;
         
-        //Maybe this is a bad idea, but for animation purposes I had the bullets reload one by one
+
         for (int i = 0; i < 6; i++)
         {
             while (timer < reloadTimePerBullet)
