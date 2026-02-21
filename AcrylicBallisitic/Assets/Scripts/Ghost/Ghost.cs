@@ -31,7 +31,7 @@ public class Ghost : MonoBehaviour
     State currentState = State.Disabled;
     Vector3 endPosition;
     GameObject indicator;
-    float flashInterval = 0.25f;
+    float flashInterval = 0.35f;
 
     void OnDifficultyChanged(DifficultyChangedEvent evt)
     {
@@ -58,7 +58,7 @@ public class Ghost : MonoBehaviour
         if (indicator != null && flashInterval <= 0f)
         {
             indicator.SetActive(!indicator.activeSelf);
-            flashInterval = 0.25f;
+            flashInterval = 0.35f;
         }
 
         Vector3 toPlayer = game.GetPlayerPosition() - transform.position;
@@ -82,13 +82,13 @@ public class Ghost : MonoBehaviour
                     endPosition = transform.position + Vector3.up * 15.0f;
 
                     currentState = State.Emerging;
-                    StartCoroutine(DelayEnterSound());
-                    Tween.PositionAtSpeed(transform, endPosition, 2.5f, Ease.InOutCubic).OnComplete(() =>
+                    Tween.Position(transform, endPosition, 2.5f, Ease.InOutCubic).OnComplete(() =>
                     {
-                        IndicateAttack();
                         currentState = State.Fusing;
+                        IndicateAttack();
                         fuseTimer = fuseTime;
                     });
+                    StartCoroutine(DelayEnterSound());
                 }
                 break;
             case State.Emerging:
@@ -120,14 +120,14 @@ public class Ghost : MonoBehaviour
     {
         if (blastIndicatorPrefab != null)
         {
-            indicator = Instantiate(blastIndicatorPrefab, transform.position, Quaternion.identity);
-            flashInterval = 0.25f;
+            indicator = Instantiate(blastIndicatorPrefab, transform.position, Quaternion.identity, transform);
+            flashInterval = 0.35f;
         }
     }
 
     IEnumerator DelayEnterSound()
     {
-        yield return new WaitForSeconds(2.25f);
+        yield return new WaitForSeconds(1.35f);
         game.PlaySound("GHOST_ENTER");
     }
 
