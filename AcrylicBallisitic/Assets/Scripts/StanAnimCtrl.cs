@@ -23,8 +23,8 @@ public class StanAnimCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AnimationController.SetFloat("PlayerVelocity",Rigid.velocity.x + Rigid.velocity.z);
+        AnimationController.SetFloat("PlayerVelocity",Rigid.linearVelocity.x + Rigid.linearVelocity.z);
 
-        print("Stans velocity is" + Rigid.velocity.x + Rigid.velocity.z);
+        print("Stans velocity is" + Rigid.linearVelocity.x + Rigid.linearVelocity.z);
     }
 }

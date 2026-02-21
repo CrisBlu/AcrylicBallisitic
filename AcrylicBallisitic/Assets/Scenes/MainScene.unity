@@ -2996,6 +2996,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6581761731673779274, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581761731673779274, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 2560
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581761731673779274, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1440
+      objectReference: {fileID: 0}
     - target: {fileID: 6582942082022989577, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
       propertyPath: player
       value: 
@@ -3016,6 +3028,10 @@ PrefabInstance:
       propertyPath: 'paintings.Array.data[2]'
       value: 
       objectReference: {fileID: 1153269301}
+    - target: {fileID: 6900319326602919886, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1621.25
+      objectReference: {fileID: 0}
     - target: {fileID: 7690580743876889978, guid: 1546c7136645cdb47bdf92758a36cd97, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
