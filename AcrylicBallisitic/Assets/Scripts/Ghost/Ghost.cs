@@ -9,7 +9,8 @@ public class Ghost : MonoBehaviour
         Idle,
         Emerging,
         Fusing,
-        Disappearing
+        Disappearing,
+        Disabled
     }
 
     [Header("Timing")]
@@ -26,13 +27,26 @@ public class Ghost : MonoBehaviour
     GameManager game;
     float attackTimer = 0f;
     float fuseTimer = 0f;
-    State currentState = State.Idle;
+    State currentState = State.Disabled;
     Vector3 endPosition;
+
+    void OnDifficultyChanged(DifficultyChangedEvent evt)
+    {
+        if (evt.newDifficulty == DifficultyProgression.DifficultyLevel.Easy)
+        {
+            currentState = State.Disabled;
+        }
+        else if (currentState == State.Disabled)
+        {
+            currentState = State.Idle;
+            attackTimer = Random.Range(minAttackInterval, maxAttackInterval);
+        }
+    }
 
     void Start()
     {
         game = GameManager.GetManager();
-        attackTimer = Random.Range(minAttackInterval, maxAttackInterval);
+        EventManager.AddListener<DifficultyChangedEvent>(OnDifficultyChanged);
     }
 
     void Update()
@@ -80,6 +94,8 @@ public class Ghost : MonoBehaviour
                 }
                 break;
             case State.Disappearing:
+                break;
+            case State.Disabled:
                 break;
         }
     }
