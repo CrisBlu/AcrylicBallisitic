@@ -33,7 +33,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: be19ef8b5bf5aad4b9ade48c541e442c, type: 3}
   - enabled: 1
     name: HORSE_PROJECTILE
-    clip: {fileID: 8300000, guid: 034c3c30e8770ca4e857a44597542596, type: 3}
+    clip: {fileID: 8300000, guid: 4b02c00af7303bc4a921c5269d1572be, type: 3}
     variations: []
   - enabled: 1
     name: PROJECTILE
