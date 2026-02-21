@@ -9,7 +9,9 @@ public class PaintingController : MonoBehaviour
     [SerializeField] float maxHealth = 300.0f;
     [SerializeField] List<GameObject> projectilePrefabs;
     [SerializeField] float projectileSpawnInterval = 2.0f;
-    
+    public GameObject healthPickupPrefab;
+    [Range(0, 1)] public float dropChance = 0.1f;
+
     float health;
     float projectileSpawnTimer = 0.0f;
 
@@ -26,6 +28,7 @@ public class PaintingController : MonoBehaviour
         {
             health -= damage;
             GameManager.GetManager().NotifyDamageDealt(damage);
+            HandleDropHealthPickup();
             if (health <= 0.0f)
             {
                 // TODO: death
@@ -75,6 +78,18 @@ public class PaintingController : MonoBehaviour
          else if (other.GetComponent<Furniture>() != null)
         {
             other.GetComponent<Furniture>().DoDamage();
+        }
+    }
+
+    void HandleDropHealthPickup()
+    {
+        Instantiate(healthPickupPrefab, transform.position, Quaternion.identity);
+        if (Random.value <= dropChance)
+        {
+            if (healthPickupPrefab != null)
+            {
+                Instantiate(healthPickupPrefab, transform.position, Quaternion.identity);
+            }
         }
     }
 }
