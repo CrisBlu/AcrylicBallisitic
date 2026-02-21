@@ -65,6 +65,8 @@ MonoBehaviour:
   maxHealth: 300
   projectilePrefabs: []
   projectileSpawnInterval: 1
+  healthPickupPrefab: {fileID: 8512744933115948769, guid: ede10bbe1bb3324429df7607461f41dd, type: 3}
+  dropChance: 0.1
 --- !u!65 &9003744943256014146
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ public class PaintingController : MonoBehaviour
     [SerializeField] float maxHealth = 300.0f;
     [SerializeField] List<GameObject> projectilePrefabs;
     [SerializeField] float projectileSpawnInterval = 2.0f;
-    public GameObject healthPickupPrefab;
+    [SerializeField] GameObject healthPickupPrefab;
     [Range(0, 1)] public float dropChance = 0.1f;
 
     float health;
@@ -83,12 +83,19 @@ public class PaintingController : MonoBehaviour
 
     void HandleDropHealthPickup()
     {
-        //Instantiate(healthPickupPrefab, transform.position, Quaternion.identity);
         if (Random.value <= dropChance)
         {
             if (healthPickupPrefab != null)
             {
-                //Instantiate(healthPickupPrefab, transform.position, Quaternion.identity);
+                GameObject loot = Instantiate(healthPickupPrefab, transform.position, Quaternion.identity);
+                Rigidbody rb = loot.GetComponent<Rigidbody>();
+
+                if (rb != null)
+                {
+                    Vector3 forceDirection = new Vector3(Random.Range(-0.5f, 0.5f), 1f, Random.Range(-0.5f, 0.5f));
+                    float forceStrength = 5f;
+                    rb.AddForce(forceDirection.normalized * forceStrength, ForceMode.Impulse);
+                }
             }
         }
     }
