@@ -98,6 +98,8 @@ public class Movement : MonoBehaviour
             return;
         }
 
+        
+
         //Will shoot past the cursor location and hit anything behind, can limit range to where was click if needed
 
         Vector3 ShootAtPoint = LookVec;
@@ -114,14 +116,14 @@ public class Movement : MonoBehaviour
 
         Ray ray = new Ray(Gun.position, GunShootDir);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100))
+        if (Physics.Raycast(ray, out hit, 300))
         {
             //Determine Target and Deal Damage if Enemy
             bool hitSomething;
             if(hit.collider.CompareTag("Enemy"))
             {
                 hitSomething = true;
-                hit.collider.gameObject.GetComponent<PaintingController>().DoDamage(10);
+                //hit.collider.gameObject.GetComponent<PaintingController>().DoDamage(10);
                 
             }
             else
@@ -148,6 +150,7 @@ public class Movement : MonoBehaviour
             BFXLineFade(BFXObj);
 
             penaltyLevel++;
+            SceneCamera.Inst.Shake(.5f * penaltyLevel);
             penaltyTimer = PenaltyDuration;
 
 
