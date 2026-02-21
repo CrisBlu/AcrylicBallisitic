@@ -26,6 +26,23 @@ public class SlotsDisplay : MonoBehaviour
         }
     }
 
+    public void SetHealth(int hpCount)
+    {
+        
+        for (int i = 0; i < maxSlots; i++)
+        {
+            if (i < hpCount)
+            {
+                slotImages[i].sprite = fullSlotSprite;
+            }
+            else
+            {
+                slotImages[i].sprite = emptySlotSprite;
+            }
+        }
+
+    }
+
     void Start()
     {
         // Delete all children (in case there are any in the editor)

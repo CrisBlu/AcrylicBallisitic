@@ -52,7 +52,8 @@ public class PaintingController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            print("Hit player");
+            
+            GameManager.GetManager().DamagePlayer();
         }
     }
 }
