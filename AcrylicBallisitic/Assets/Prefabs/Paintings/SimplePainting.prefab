@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimplePaintingMovement
   speed: 5
-  moveDuration: 8
+  moveDuration: 12
 --- !u!114 &6797540349570997634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,7 +155,7 @@ MonoBehaviour:
   projectilePrefabs:
   - {fileID: 5491916927107671022, guid: 9174257c1f7d30f419ff6810524de6e4, type: 3}
   - {fileID: 5491916927107671022, guid: d65dd32dfb147024686244d28c7c739c, type: 3}
-  projectileSpawnInterval: 1
+  projectileSpawnInterval: 2
 --- !u!65 &7537039079006474347
 BoxCollider:
   m_ObjectHideFlags: 0
