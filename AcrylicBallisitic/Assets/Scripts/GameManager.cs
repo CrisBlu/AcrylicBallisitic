@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<PaintingController> paintings;
     [SerializeField] PaintingMovementArea movementArea;
     [SerializeField] UIManager uiManager;
+    [SerializeField] DifficultyProgression difficultyProgression;
     [SerializeField] Movement player;
 
     public PaintingMovementArea GetMovementArea() { return movementArea; }
@@ -75,9 +76,59 @@ public class GameManager : MonoBehaviour
             isDamageCleared = false;
             previousNetWorth = GetNetWorth() + damage;
         }
+        difficultyProgression.UpdateDifficulty(GetNetWorth() / GetMaxNetWorth());
         uiManager.UpdateNetWorth(GetNetWorth(), previousNetWorth, damage);
         damageDecayTimer = damageDecayDelay;
         isDamageDecaying = false;
+    }
+
+    //******************************************************
+    // Player tracking and management
+
+    public void DamagePlayer()
+    {
+        playerHitPoints = Mathf.Max(0, playerHitPoints - 1);
+        uiManager.UpdatePlayerHitPoints(playerHitPoints);
+
+        if(playerHitPoints <= 0)
+        {
+            Debug.Log("GameOver");
+        }
+    }
+
+    public void UpdateBullets(Ammo[] playerAmmo)
+    {
+        uiManager.UpdatePlayerAmmo(playerAmmo);
+    }
+
+    public void UseBullet(bool hit)
+    {
+        playerAmmo[iBullet] = hit ? Ammo.Hit : Ammo.Miss;
+        iBullet--;
+        uiManager.UpdatePlayerAmmo(playerAmmo);
+    }
+
+    public void ReloadBullet()
+    {
+        iBullet++;
+        playerAmmo[iBullet] = Ammo.Loaded;
+        uiManager.UpdatePlayerAmmo(playerAmmo);
+
+    }
+
+    bool ShouldSpawn()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) return true;
+        int activeCount = 0;
+        foreach (PaintingController painting in paintings)
+        {
+            if (painting.GetComponent<PaintingMovement>().GetState() != PaintingMovement.State.None)
+            {
+                activeCount++;
+            }
+        }
+        print(activeCount + " / " + difficultyProgression.GetSpawnCount());
+        return activeCount < difficultyProgression.GetSpawnCount();
     }
 
     void Awake()
@@ -88,21 +139,19 @@ public class GameManager : MonoBehaviour
         playerAmmo = new Ammo[6];
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         uiManager.UpdatePlayerHitPoints(playerHitPoints);
         uiManager.UpdatePlayerAmmo(playerAmmo);
+        difficultyProgression.UpdateDifficulty(1f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         spawnTimer += Time.deltaTime;
         spawnInterval -= Time.deltaTime * 0.05f;
 
         float reticleSize = Mathf.Max(0.5f, player.MultiShotPenalty * player.penaltyLevel);
-        print(reticleSize);
         uiManager.UpdateReticle(reticleSize);
 
         if (previousNetWorth > GetNetWorth())
@@ -143,62 +192,7 @@ public class GameManager : MonoBehaviour
             paintings[randomIndex].Spawn();
             lastSpawnIndex = randomIndex;
         }
-
-
     }
-
-    bool ShouldSpawn()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) return true;
-        int activeCount = 0;
-        foreach (PaintingController painting in paintings)
-        {
-            if (painting.GetComponent<PaintingMovement>().GetState() != PaintingMovement.State.None)
-            {
-                activeCount++;
-            }
-        }
-
-        if (activeCount == 0) return true;
-        else if (activeCount == 1)
-        {
-            return spawnTimer >= spawnInterval;
-        }
-        return false;
-    }
-
-    public void DamagePlayer()
-    {
-        playerHitPoints = Mathf.Max(0, playerHitPoints - 1);
-        uiManager.UpdatePlayerHitPoints(playerHitPoints);
-
-        if(playerHitPoints <= 0)
-        {
-            Debug.Log("GameOver");
-        }
-    }
-
-    public void UpdateBullets(Ammo[] playerAmmo)
-    {
-        uiManager.UpdatePlayerAmmo(playerAmmo);
-    }
-
-    public void UseBullet(bool hit)
-    {
-        playerAmmo[iBullet] = hit ? Ammo.Hit : Ammo.Miss;
-        iBullet--;
-        uiManager.UpdatePlayerAmmo(playerAmmo);
-    }
-
-    public void ReloadBullet()
-    {
-        iBullet++;
-        playerAmmo[iBullet] = Ammo.Loaded;
-        uiManager.UpdatePlayerAmmo(playerAmmo);
-
-    }
-
-
 }
 
 public enum Ammo
