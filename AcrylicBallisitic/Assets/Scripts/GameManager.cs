@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     int lastSpawnIndex = -1;
     float spawnInterval = 25.0f;
     float spawnTimer = 0.0f;
+    float gracePeriod;
 
     int playerHitPoints = 6;
 
@@ -85,8 +86,7 @@ public class GameManager : MonoBehaviour
         netWorth = Mathf.Max(0.0f, netWorth - damage);
         if (netWorth <= 0.0f)
         {
-            print("Player wins!");
-            // TODO: end game
+            SceneManager.LoadScene(3);
             return;
         }
 
@@ -171,11 +171,13 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        gracePeriod = 2.0f;
         uiManager.UpdatePlayerHitPoints(playerHitPoints);
         uiManager.UpdatePlayerAmmo(playerAmmo);
         difficultyProgression.UpdateDifficulty(1f);
         netWorth = GetMaxNetWorth();
         audioPlayer = GetComponent<AudioPlayer>();
+        Cursor.visible = false;
     }
 
     void OnDestroy()
@@ -183,15 +185,19 @@ public class GameManager : MonoBehaviour
         InputSystem.actions.Disable();
         instance = null;
         Tween.StopAll();
+        Cursor.visible = true;
     }
 
     void Update()
     {
-        spawnTimer += Time.deltaTime;
-        spawnInterval -= Time.deltaTime * 0.05f;
-
         float reticleSize = Mathf.Max(.5f, player.MultiShotPenalty * player.penaltyLevel);
         uiManager.UpdateReticle(reticleSize);
+
+        gracePeriod -= Time.deltaTime;
+        if (gracePeriod > 0.0f) return;
+
+        spawnTimer += Time.deltaTime;
+        spawnInterval -= Time.deltaTime * 0.05f;
 
         if (previousNetWorth > GetNetWorth())
         {
@@ -230,6 +236,11 @@ public class GameManager : MonoBehaviour
             }
             paintings[randomIndex].Spawn();
             lastSpawnIndex = randomIndex;
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            NotifyDamageDealt(100.0f);
         }
     }
 

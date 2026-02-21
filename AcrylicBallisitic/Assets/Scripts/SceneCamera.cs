@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
 
 public class SceneCamera : MonoBehaviour
@@ -36,9 +36,13 @@ public class SceneCamera : MonoBehaviour
         }
     }
 
-    public async void Shake(float strength)
+    public void Shake(float strength)
     {
-        
+        StartCoroutine(DoShake(strength));
+    }
+
+    IEnumerator DoShake(float strength)
+    {
         float duration = .1f;
         Vector3 startPos = transform.position;
         float timer = 0;
@@ -48,7 +52,7 @@ public class SceneCamera : MonoBehaviour
             
             timer += Time.deltaTime;
             transform.position = startPos + Random.insideUnitSphere * strength;
-            await Task.Yield(); 
+            yield return null;
         }
 
         transform.position = startPos;

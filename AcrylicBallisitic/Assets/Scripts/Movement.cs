@@ -134,7 +134,7 @@ public class Movement : MonoBehaviour
             if(hit.collider.CompareTag("Enemy"))
             {
                 hitSomething = true;
-                hit.collider.gameObject.GetComponent<PaintingController>().DoDamage(10);
+                hit.collider.gameObject.GetComponent<PaintingController>().DoDamage(100);
                 
             }
             else
@@ -196,6 +196,7 @@ public class Movement : MonoBehaviour
         float timer = 0;
         bool perfectRound = true;
 
+
         //Reload faster if all bullets are marked as hits
         Ammo[] playerAmmo = GameManager.GetManager().GetPlayerAmmo();
         foreach(Ammo shot in playerAmmo)
@@ -220,13 +221,11 @@ public class Movement : MonoBehaviour
             }
 
             timer = 0;
-            GameManager.GetManager().ReloadBullet();
+            GameManager.GetManager()?.ReloadBullet();
+            GameManager.GetManager()?.PlaySound("PLAYER_RELOAD");
         }
 
         canShoot = true;
-        
-        GameManager.GetManager().PlaySound("PLAYER_RELOAD");
-        
     }
 
     public void DecreasePenalty()
