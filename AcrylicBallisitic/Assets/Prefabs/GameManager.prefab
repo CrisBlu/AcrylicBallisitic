@@ -850,6 +850,7 @@ GameObject:
   - component: {fileID: 8686510650745359260}
   - component: {fileID: 6582942082022989577}
   - component: {fileID: 3205328070748974954}
+  - component: {fileID: 5994850880473005145}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -910,6 +911,19 @@ MonoBehaviour:
   currentDifficulty: 0
   normalThreshold: 0.99
   difficultThreshold: 0.33
+--- !u!114 &5994850880473005145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5674466145031655022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00c26237397dc842b923ed2868a029b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioPlayer
+  audioAssets: {fileID: 11400000, guid: 010463be0642e7b4e8fbec36de87dab3, type: 2}
 --- !u!1 &5724894056670785233
 GameObject:
   m_ObjectHideFlags: 0

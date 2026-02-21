@@ -9,7 +9,7 @@ public class PaintingController : MonoBehaviour
     [SerializeField] float maxHealth = 300.0f;
     [SerializeField] List<GameObject> projectilePrefabs;
     [SerializeField] float projectileSpawnInterval = 2.0f;
-    public GameObject healthPickupPrefab;
+    [SerializeField] GameObject healthPickupPrefab;
     [Range(0, 1)] public float dropChance = 0.1f;
 
     float health;

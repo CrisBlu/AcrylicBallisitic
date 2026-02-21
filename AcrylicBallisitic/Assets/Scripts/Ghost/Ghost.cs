@@ -1,6 +1,6 @@
 using UnityEngine;
-using System.Collections;
 using PrimeTween;
+using System.Collections;
 
 public class Ghost : MonoBehaviour
 {
@@ -82,6 +82,7 @@ public class Ghost : MonoBehaviour
                     endPosition = transform.position + Vector3.up * 15.0f;
 
                     currentState = State.Emerging;
+                    StartCoroutine(DelayEnterSound());
                     Tween.PositionAtSpeed(transform, endPosition, 2.5f, Ease.InOutCubic).OnComplete(() =>
                     {
                         IndicateAttack();
@@ -99,8 +100,7 @@ public class Ghost : MonoBehaviour
                 }
                 else
                 {
-                    Attack();
-                    currentState = State.Disappearing;
+                    StartCoroutine(Attack());
                     endPosition = transform.position + Vector3.down * 15.0f;
                     Tween.PositionAtSpeed(transform, endPosition, 2.5f, Ease.InOutCubic).OnComplete(() =>
                     {
@@ -125,7 +125,13 @@ public class Ghost : MonoBehaviour
         }
     }
 
-    void Attack()
+    IEnumerator DelayEnterSound()
+    {
+        yield return new WaitForSeconds(2.25f);
+        game.PlaySound("GHOST_ENTER");
+    }
+
+    IEnumerator Attack()
     {
         if (indicator != null)
         {
@@ -135,6 +141,12 @@ public class Ghost : MonoBehaviour
         {
             Instantiate(blastEffectPrefab, transform.position, Quaternion.identity);
         }
+        game.PlaySound("GHOST_ATTACK");
+        currentState = State.Disappearing;
+
+        yield return new WaitForSeconds(2.05f);
+        game.PlaySound("GHOST_LEAVE");
+        
     }
 }
 
