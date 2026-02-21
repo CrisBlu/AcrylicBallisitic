@@ -150,7 +150,7 @@ public class Movement : MonoBehaviour
             BFXLineFade(BFXObj);
 
             penaltyLevel++;
-            //SceneCamera.Inst.Shake(.5f * penaltyLevel);
+            SceneCamera.Inst.Shake(.5f * penaltyLevel);
             penaltyTimer = PenaltyDuration;
 
 
