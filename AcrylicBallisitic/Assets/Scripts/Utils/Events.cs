@@ -15,3 +15,12 @@ public class DifficultyChangedEvent : GameEvent
         newDifficulty = difficulty;
     }
 }
+
+public class LowerMusicVolumeEvent : GameEvent
+{
+    public bool shouldLower = true;
+    public LowerMusicVolumeEvent(bool shouldLower)
+    {
+        this.shouldLower = shouldLower;
+    }
+}
