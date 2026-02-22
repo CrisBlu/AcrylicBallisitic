@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
         if (IsGracePeriod()) return;
         playerHitPoints = Mathf.Max(0, playerHitPoints - 1);
         uiManager.UpdatePlayerHitPoints(playerHitPoints);
-        SceneCamera.Inst.Shake(.25f, .1f);
+        SceneCamera.Inst.Shake(.35f, .12f);
 
         if(playerHitPoints <= 0)
         {
@@ -201,7 +201,7 @@ public class GameManager : MonoBehaviour
 
     bool ShouldSpawn()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) return true;
+        //if (Input.GetKeyDown(KeyCode.Space)) return true;
         int activeCount = 0;
         foreach (PaintingController painting in paintings)
         {
