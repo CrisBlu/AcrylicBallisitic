@@ -9,6 +9,7 @@ public class PowerupPickup : MonoBehaviour
             Movement Move = other.gameObject.GetComponentInParent<Movement>();
             if (Move != null)
             {
+                GameManager.GetManager().PlaySound("PLAYER_PICKUP_HEALTH", 2f);
                 Move.TriggerPowerUp();
                 Destroy(gameObject);
                 Debug.Log("Triggered");

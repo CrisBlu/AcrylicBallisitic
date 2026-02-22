@@ -76,3 +76,11 @@ MonoBehaviour:
     name: PLAYER_HIT
     clip: {fileID: 8300000, guid: c077b3be3e884154d9ab0a42ec89ff40, type: 3}
     variations: []
+  - enabled: 1
+    name: PLAYER_PICKUP_HEALTH
+    clip: {fileID: 8300000, guid: 364c2439f4380484898392d11b51fbd6, type: 3}
+    variations: []
+  - enabled: 1
+    name: PLAYER_PICKUP_POWER
+    clip: {fileID: 8300000, guid: b8c1ac7a855539e4aa4b88a81ea64bcb, type: 3}
+    variations: []
