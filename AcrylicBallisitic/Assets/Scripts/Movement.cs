@@ -211,7 +211,6 @@ public class Movement : MonoBehaviour
         float timer = 0;
         bool perfectRound = true;
 
-
         //Reload faster if all bullets are marked as hits
         Ammo[] playerAmmo = GameManager.GetManager().GetPlayerAmmo();
         foreach(Ammo shot in playerAmmo)
@@ -223,10 +222,8 @@ public class Movement : MonoBehaviour
             }
         }
 
-
         float reloadTimePerBullet = perfectRound ? .5f/6 : ReloadTime / 6;
         
-
         for (int i = 0; i < 6; i++)
         {
             while (timer < reloadTimePerBullet)
@@ -234,6 +231,8 @@ public class Movement : MonoBehaviour
                 timer += Time.deltaTime;
                 await Task.Yield();
             }
+
+            if (isPoweredUp) return;
 
             timer = 0;
             GameManager.GetManager()?.ReloadBullet();
@@ -264,10 +263,4 @@ public class Movement : MonoBehaviour
         StartCoroutine(PowerUp());
         GameManager.GetManager().AmmoPowerUp();
     }
-
-
-
-
-
-
 }
