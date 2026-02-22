@@ -29,6 +29,7 @@ public class Ghost : MonoBehaviour
     float attackTimer = 0f;
     float fuseTimer = 0f;
     State currentState = State.Disabled;
+    Vector3 startPosition;
     Vector3 endPosition;
     GameObject indicator;
     float flashInterval = 0.35f;
@@ -54,7 +55,20 @@ public class Ghost : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.GetManager().IsGracePeriod()) return;
+        if (GameManager.GetManager().IsGracePeriod())
+        {
+            if (currentState == State.Emerging || currentState == State.Fusing)
+            {
+                endPosition = transform.position;
+                endPosition.y = startPosition.y;
+                Tween.PositionAtSpeed(transform, endPosition, 2.5f, Ease.InOutCubic).OnComplete(() =>
+                {
+                    currentState = State.Idle;
+                    attackTimer = Random.Range(minAttackInterval, maxAttackInterval);
+                });
+            }
+            return;
+        }
 
         flashInterval -= Time.deltaTime;
         if (indicator != null && flashInterval <= 0f)
@@ -84,6 +98,7 @@ public class Ghost : MonoBehaviour
                     // Vector3 targetPos = game.GetPlayerPosition() + new Vector3(randomCircle.x, 0, randomCircle.y);
                     Vector3 targetPos = game.GetPlayerPosition();
                     transform.position = new Vector3(targetPos.x, transform.position.y, targetPos.z);
+                    startPosition = transform.position;
                     endPosition = transform.position + Vector3.up * 15.0f;
 
                     currentState = State.Emerging;
@@ -106,7 +121,8 @@ public class Ghost : MonoBehaviour
                 else
                 {
                     StartCoroutine(Attack());
-                    endPosition = transform.position + Vector3.down * 15.0f;
+                    endPosition = transform.position;
+                    endPosition.y = startPosition.y;
                     Tween.PositionAtSpeed(transform, endPosition, 2.5f, Ease.InOutCubic).OnComplete(() =>
                     {
                         currentState = State.Idle;
