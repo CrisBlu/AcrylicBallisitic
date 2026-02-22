@@ -680,7 +680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00c26237397dc842b923ed2868a029b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioPlayer
-  audioAssets: {fileID: 11400000, guid: 02d40ab798775044aabe72b9e79545ff, type: 2}
+  audioAssets: {fileID: 11400000, guid: 75996bc02a74e2143a9f0c6ca45a8727, type: 2}
 --- !u!4 &720281479
 Transform:
   m_ObjectHideFlags: 0
