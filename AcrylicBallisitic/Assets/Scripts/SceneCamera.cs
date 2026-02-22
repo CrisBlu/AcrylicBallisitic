@@ -36,14 +36,13 @@ public class SceneCamera : MonoBehaviour
         }
     }
 
-    public void Shake(float strength)
+    public void Shake(float strength, float duration = .05f)
     {
-        StartCoroutine(DoShake(strength));
+        StartCoroutine(DoShake(strength, duration));
     }
 
-    IEnumerator DoShake(float strength)
+    IEnumerator DoShake(float strength, float duration)
     {
-        float duration = .05f;
         Vector3 startPos = transform.position;
         float timer = 0;
 
