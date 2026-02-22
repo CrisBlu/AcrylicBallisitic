@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using PrimeTween;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -16,6 +18,10 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Settings")]
     [SerializeField] float maxNetWorth = 900.0f;
+
+    [Header("Audio")]
+    [SerializeField] AudioPlayer sfxPlayer;
+    [SerializeField] AudioPlayer voiceLinePlayer;
 
     public PaintingMovementArea GetMovementArea() { return movementArea; }
 
@@ -38,8 +44,6 @@ public class GameManager : MonoBehaviour
     static public GameManager GetManager() { return instance; }
     static GameManager instance;
 
-    AudioPlayer audioPlayer;
-
     float netWorth = 0.0f;
     float previousNetWorth = 0.0f;
     bool isDamageCleared = true;
@@ -58,6 +62,9 @@ public class GameManager : MonoBehaviour
     private int iBullet = 5;
 
     Ammo[] playerAmmo;
+
+    public void SetGracePeriod(float value) { gracePeriod = value; }
+    public bool IsGracePeriod() { return gracePeriod > 0.0f; }
 
     public float GetNetWorth()
     {
@@ -86,7 +93,7 @@ public class GameManager : MonoBehaviour
         netWorth = Mathf.Max(0.0f, netWorth - damage);
         if (netWorth <= 0.0f)
         {
-            SceneManager.LoadScene(3);
+            StartCoroutine(EndGame(true));
             return;
         }
 
@@ -111,6 +118,26 @@ public class GameManager : MonoBehaviour
 
         if(playerHitPoints <= 0)
         {
+            StartCoroutine(EndGame(false));
+        }
+        else
+        {
+            PlaySound("PLAYER_PAIN");
+        }
+    }
+
+    IEnumerator EndGame(bool victory)
+    {
+        if (victory)
+        {
+            PlayVoiceLine("GHOST_DEATH");
+            yield return new WaitForSeconds(4.0f);
+            SceneManager.LoadScene(3);
+        }
+        else   
+        {
+            // PlayVoiceLine("PLAYER_DEATH");
+            yield return new WaitForSeconds(0.5f);
             SceneManager.LoadScene(2);
         }
     }
@@ -155,11 +182,13 @@ public class GameManager : MonoBehaviour
 
     public void PlaySound(string name)
     {
-        if (audioPlayer == null)
-        {
-            audioPlayer = GetComponent<AudioPlayer>();
-        }
-        audioPlayer?.PlaySound(name);
+        sfxPlayer?.PlaySound(name);
+    }
+
+    public void PlayVoiceLine(string name)
+    {
+        print("Playing voice line: " + name);
+        voiceLinePlayer?.PlaySound(name);
     }
 
     bool ShouldSpawn()
@@ -186,12 +215,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        gracePeriod = 2.0f;
+        gracePeriod = 8.0f;
         uiManager.UpdatePlayerHitPoints(playerHitPoints);
         uiManager.UpdatePlayerAmmo(playerAmmo);
+        difficultyProgression.currentDifficulty = DifficultyProgression.DifficultyLevel.Difficult;
         difficultyProgression.UpdateDifficulty(1f);
         netWorth = GetMaxNetWorth();
-        audioPlayer = GetComponent<AudioPlayer>();
         Cursor.visible = false;
         uiManager.UpdateNetWorth(GetNetWorth(), GetNetWorth(), 0.0f);
     }
