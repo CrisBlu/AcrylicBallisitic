@@ -55,6 +55,9 @@ public class GameManager : MonoBehaviour
     float gracePeriod;
 
     int playerHitPoints = 6;
+    float playerDamage = 10.0f;
+
+    public float GetPlayerDamage() { return playerDamage; }
 
     //Iterator for the bullet we are on
     private int iBullet = 5;
@@ -95,6 +98,7 @@ public class GameManager : MonoBehaviour
         if (netWorth <= 0.0f)
         {
             StartCoroutine(EndGame(true));
+            SetGracePeriod(10f);
             return;
         }
 
@@ -114,6 +118,7 @@ public class GameManager : MonoBehaviour
 
     public void DamagePlayer()
     {
+        if (IsGracePeriod()) return;
         playerHitPoints = Mathf.Max(0, playerHitPoints - 1);
         uiManager.UpdatePlayerHitPoints(playerHitPoints);
 
@@ -241,6 +246,19 @@ public class GameManager : MonoBehaviour
         //Debug.Log($"<color=red>Game Paused.</color> Cursor State: {Cursor.lockState} | Visible: {Cursor.visible}");
         float reticleSize = Mathf.Max(.5f, player.MultiShotPenalty * player.penaltyLevel);
         uiManager.UpdateReticle(reticleSize);
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            playerDamage = 10.0f;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            playerDamage = 20.0f;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            playerDamage = 30.0f;
+        }
 
         if (previousNetWorth > GetNetWorth())
         {
