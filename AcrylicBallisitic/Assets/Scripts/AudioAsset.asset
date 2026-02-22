@@ -55,3 +55,20 @@ MonoBehaviour:
     name: PLAYER_SHOOT
     clip: {fileID: 8300000, guid: 89befbb125b78d74aaff729e46cddcb1, type: 3}
     variations: []
+  - enabled: 1
+    name: BUTTON_CLICK
+    clip: {fileID: 8300000, guid: 3f2233116532f0a4ea881ff716358ffd, type: 3}
+    variations: []
+  - enabled: 1
+    name: BUTTON_HOVER
+    clip: {fileID: 8300000, guid: 5ee3f034fffa9d9428b40b30cf318885, type: 3}
+    variations: []
+  - enabled: 1
+    name: PLAYER_PAIN
+    clip: {fileID: 8300000, guid: 364c2439f4380484898392d11b51fbd6, type: 3}
+    variations:
+    - {fileID: 8300000, guid: c469013089690804f902f68ce45e39c4, type: 3}
+    - {fileID: 8300000, guid: b68e356de2c7d81418573541fb8bfcda, type: 3}
+    - {fileID: 8300000, guid: 71fa03db8c59b6349ba6d6f188c04488, type: 3}
+    - {fileID: 8300000, guid: 95f2d6761f2668542bdc8214d4f43dc6, type: 3}
+    - {fileID: 8300000, guid: b8c1ac7a855539e4aa4b88a81ea64bcb, type: 3}

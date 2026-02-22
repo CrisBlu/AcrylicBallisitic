@@ -107,6 +107,8 @@ public class Movement : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext context)
     {
+        if (GameManager.GetManager().IsGracePeriod()) return;
+
         if(!canShoot)
         {
             Debug.Log("Can't shoot");
@@ -251,6 +253,7 @@ public class Movement : MonoBehaviour
     IEnumerator PowerUp()
     {
         isPoweredUp = true;
+        canShoot = true;
         yield return new WaitForSeconds(PowerupDuration);
         isPoweredUp = false;
         GameManager.GetManager().AmmoPowerDown();
