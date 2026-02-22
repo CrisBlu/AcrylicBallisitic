@@ -57,6 +57,7 @@ public class Movement : MonoBehaviour
     void OnDestroy()
     {
         attack.performed -= Shoot;
+        Pause.performed -= TogglePause;
     }
 
     void FixedUpdate()
