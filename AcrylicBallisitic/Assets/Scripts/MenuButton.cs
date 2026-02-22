@@ -22,7 +22,7 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
     public async void DelaySwitchScenes(int scene)
     {
         float timer = 0;
-        float duration = 2f;
+        float duration = .75f;
 
         while (timer < duration)
         {
