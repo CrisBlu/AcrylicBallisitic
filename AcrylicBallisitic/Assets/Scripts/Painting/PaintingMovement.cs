@@ -50,6 +50,7 @@ public class PaintingMovement : MonoBehaviour
     // Update is called once per frame
     virtual protected void Update()
     {
+        if (GameManager.GetManager().IsGracePeriod()) return;
         switch (state)
         {
             case State.None:
