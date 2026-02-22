@@ -54,6 +54,8 @@ public class Ghost : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.GetManager().IsGracePeriod()) return;
+
         flashInterval -= Time.deltaTime;
         if (indicator != null && flashInterval <= 0f)
         {
@@ -63,8 +65,11 @@ public class Ghost : MonoBehaviour
 
         Vector3 toPlayer = game.GetPlayerPosition() - transform.position;
         toPlayer.y = 0.0f;
-        Quaternion rotation = Quaternion.LookRotation(toPlayer);
-        transform.rotation = rotation;
+        if (toPlayer != Vector3.zero)
+        {
+            Quaternion rotation = Quaternion.LookRotation(toPlayer);
+            transform.rotation = rotation;
+        }
         
         switch (currentState)
         {

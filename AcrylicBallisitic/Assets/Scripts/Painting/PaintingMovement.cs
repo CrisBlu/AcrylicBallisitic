@@ -33,7 +33,7 @@ public class PaintingMovement : MonoBehaviour
         targetPosition = position;
         startPosition = targetPosition + Vector3.up * 20.0f;
         transform.SetPositionAndRotation(startPosition, Quaternion.LookRotation(-normal));
-        Tween.Position(transform, targetPosition, 1.5f, Ease.InOutCubic).OnComplete(() =>
+        Tween.Position(transform, targetPosition, 1.0f, Ease.InOutCubic).OnComplete(() =>
         {
             Idle();
         });
@@ -50,6 +50,7 @@ public class PaintingMovement : MonoBehaviour
     // Update is called once per frame
     virtual protected void Update()
     {
+        if (GameManager.GetManager().IsGracePeriod()) return;
         switch (state)
         {
             case State.None:
@@ -98,7 +99,7 @@ public class PaintingMovement : MonoBehaviour
 
         Vector3 position = transform.position;
         position.y += 20.0f;
-        Tween.Position(transform, position, 1.5f, Ease.InOutCubic).OnComplete(() =>
+        Tween.Position(transform, position, 1.0f, Ease.InOutCubic).OnComplete(() =>
         {
             state = State.None;
         });
