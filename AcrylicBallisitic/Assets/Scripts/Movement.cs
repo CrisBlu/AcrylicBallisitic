@@ -23,6 +23,8 @@ public class Movement : MonoBehaviour
 
     [SerializeField] Animator animator;
 
+    [SerializeField] ParticleSystem muzzleFlash;
+
     private InputAction movement;
     private Rigidbody rb;
     private InputAction attack;
@@ -52,6 +54,7 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         wallCheck = LayerMask.GetMask("Wall");
+        muzzleFlash.Stop();
     }
 
     void OnDestroy()
@@ -116,13 +119,16 @@ public class Movement : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext context)
     {
+        if (GameManager.GetManager().IsGracePeriod()) return;
+
         if(!canShoot)
         {
             Debug.Log("Can't shoot");
             return;
         }
 
-        GameManager.GetManager().PlaySound("PLAYER_SHOOT");
+        GameManager.GetManager().PlaySound("PLAYER_SHOOT", 0.5f);
+        muzzleFlash?.Play();
 
         //Will shoot past the cursor location and hit anything behind, can limit range to where was click if needed
 
@@ -148,7 +154,7 @@ public class Movement : MonoBehaviour
             {
                 hitSomething = true;
                 hit.collider.gameObject.GetComponent<PaintingController>().DoDamage(10);
-                
+                GameManager.GetManager().PlaySound("PLAYER_HIT");
             }
             else
             {
@@ -231,7 +237,6 @@ public class Movement : MonoBehaviour
         float timer = 0;
         bool perfectRound = true;
 
-
         //Reload faster if all bullets are marked as hits
         Ammo[] playerAmmo = GameManager.GetManager().GetPlayerAmmo();
         foreach(Ammo shot in playerAmmo)
@@ -243,17 +248,22 @@ public class Movement : MonoBehaviour
             }
         }
 
-
         float reloadTimePerBullet = perfectRound ? .5f/6 : ReloadTime / 6;
         
-
         for (int i = 0; i < 6; i++)
         {
-            while (timer < reloadTimePerBullet)
+            float localReloadTime = reloadTimePerBullet;
+            if (!perfectRound && playerAmmo[i] == Ammo.Hit)
+                localReloadTime /= 2;
+                   
+
+            while (timer < localReloadTime)
             {
                 timer += Time.deltaTime;
                 await Task.Yield();
             }
+
+            if (isPoweredUp) return;
 
             timer = 0;
             GameManager.GetManager()?.ReloadBullet();
@@ -273,6 +283,7 @@ public class Movement : MonoBehaviour
     IEnumerator PowerUp()
     {
         isPoweredUp = true;
+        canShoot = true;
         yield return new WaitForSeconds(PowerupDuration);
         isPoweredUp = false;
         GameManager.GetManager().AmmoPowerDown();
@@ -283,10 +294,4 @@ public class Movement : MonoBehaviour
         StartCoroutine(PowerUp());
         GameManager.GetManager().AmmoPowerUp();
     }
-
-
-
-
-
-
 }

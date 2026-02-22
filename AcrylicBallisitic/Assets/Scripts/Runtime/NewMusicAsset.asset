@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ba5ca8368b89e4bab62e46a0278ff5, type: 3}
+  m_Name: NewMusicAsset
+  m_EditorClassIdentifier: Assembly-CSharp::AudioAssetSO
+  audioAssets:
+  - enabled: 1
+    name: MAIN_MENU
+    clip: {fileID: 8300000, guid: 3d9d45d9196a9af48afc437f0182d2a5, type: 3}
+    variations: []
+  - enabled: 1
+    name: COMBAT
+    clip: {fileID: 8300000, guid: 88775b6da7afc214080577d47d80f8e3, type: 3}
+    variations: []
+  - enabled: 1
+    name: WIN_SCENE
+    clip: {fileID: 8300000, guid: 095183655cfb943439ce13498f5af303, type: 3}
+    variations: []
+  - enabled: 1
+    name: DEATH_SCENE
+    clip: {fileID: 8300000, guid: f2afa5ff9a317c744b8166d3a58142ae, type: 3}
+    variations: []

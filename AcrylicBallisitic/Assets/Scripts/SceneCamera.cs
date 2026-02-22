@@ -43,7 +43,7 @@ public class SceneCamera : MonoBehaviour
 
     IEnumerator DoShake(float strength)
     {
-        float duration = .1f;
+        float duration = .05f;
         Vector3 startPos = transform.position;
         float timer = 0;
 

@@ -18,6 +18,7 @@ public class HealthPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            GameManager.GetManager().PlaySound("PLAYER_PICKUP_HEALTH", 2f);
             GameManager.GetManager().HealPlayer();
             Destroy(gameObject);
         }
