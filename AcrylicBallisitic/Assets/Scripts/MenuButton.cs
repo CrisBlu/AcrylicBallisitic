@@ -7,4 +7,8 @@ public class MenuButton : MonoBehaviour
     {
         SceneManager.LoadScene(scene);
     }
+    public void Unpause()
+    {
+        GameManager.GetManager().TogglePause();
+    }
 }

@@ -26,10 +26,11 @@ public class Movement : MonoBehaviour
     private InputAction movement;
     private Rigidbody rb;
     private InputAction attack;
+    private InputAction Pause;
     private float penaltyTimer = 0;
     Vector2 direction = Vector2.zero;
     Vector3 LookVec;
-    private bool canShoot = true;
+    public bool canShoot = true;
     private bool isPoweredUp = false;
 
     LayerMask wallCheck;
@@ -38,8 +39,15 @@ public class Movement : MonoBehaviour
     {
         movement = InputSystem.actions.FindAction("Move");
         attack = InputSystem.actions.FindAction("Attack");
+        
 
         attack.performed += Shoot;
+
+        if (Pause == null)
+        {
+            Pause = InputSystem.actions.FindAction("Pause");
+        }
+        Pause.performed += TogglePause;
 
         rb = GetComponent<Rigidbody>();
 
@@ -189,6 +197,19 @@ public class Movement : MonoBehaviour
         }
 
         
+    }
+
+    public void TogglePause(InputAction.CallbackContext context)
+    {
+        if (GameManager.GetManager().TogglePause())
+        {
+            canShoot = false;
+            Debug.Log("CANNOT SHOOT");
+        }
+        else
+        {
+            canShoot = true;
+        }
     }
 
     public async void BFXLineFade(GameObject BFXObj)
