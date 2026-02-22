@@ -4,7 +4,7 @@ public class AudioPlayer : MonoBehaviour
 {
     [SerializeField] AudioAssetSO audioAssets;
 
-    public void PlaySound(string name)
+    public void PlaySound(string name, float volume = 1.0f)
     {
         if (audioAssets == null)
         {
@@ -14,7 +14,7 @@ public class AudioPlayer : MonoBehaviour
         AudioClip clip = audioAssets.GetClipByName(name, out bool enabled);
         if (clip != null && enabled)
         {
-            AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position);
+            AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position, volume);
         }
     }
 }

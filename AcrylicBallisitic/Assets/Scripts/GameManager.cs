@@ -180,15 +180,15 @@ public class GameManager : MonoBehaviour
     //******************************************************
     // Audio
 
-    public void PlaySound(string name)
+    public void PlaySound(string name, float volume = 1.0f)
     {
-        sfxPlayer?.PlaySound(name);
+        sfxPlayer?.PlaySound(name, volume);
     }
 
-    public void PlayVoiceLine(string name)
+    public void PlayVoiceLine(string name, float volume = 1.0f)
     {
         print("Playing voice line: " + name);
-        voiceLinePlayer?.PlaySound(name);
+        voiceLinePlayer?.PlaySound(name, volume);
     }
 
     bool ShouldSpawn()
