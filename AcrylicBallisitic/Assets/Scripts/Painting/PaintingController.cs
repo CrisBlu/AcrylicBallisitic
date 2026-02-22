@@ -12,6 +12,7 @@ public class PaintingController : MonoBehaviour
     [SerializeField] GameObject healthPickupPrefab;
     [SerializeField] GameObject powerupPickupPrefab;
     [Range(0, 1)] public float dropChance = 0.1f;
+    [SerializeField] ParticleSystem hitEffect;
 
     float health;
     float projectileSpawnTimer = 0.0f;
@@ -29,6 +30,7 @@ public class PaintingController : MonoBehaviour
         //     movement.GetState() == PaintingMovement.State.Moving)
         {
             health -= damage;
+            hitEffect?.Play();
             GameManager.GetManager().NotifyDamageDealt(damage);
             HandleDropHealthPickup();
             if (health <= 0.0f)
