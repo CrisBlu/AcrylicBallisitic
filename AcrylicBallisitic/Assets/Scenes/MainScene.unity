@@ -4325,6 +4325,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6787822735432115921, guid: b7052bcc02ea619418f2553a9cef00dd, type: 3}
+      propertyPath: dropChance
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6884668216988509465, guid: b7052bcc02ea619418f2553a9cef00dd, type: 3}
       propertyPath: m_Name
       value: JumpPainting
@@ -4927,6 +4931,10 @@ PrefabInstance:
     - target: {fileID: 6295005471096202555, guid: a08dff5cba624a048ad6766dfd60a626, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6885493469477037219, guid: a08dff5cba624a048ad6766dfd60a626, type: 3}
+      propertyPath: dropChance
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7776158949654579968, guid: a08dff5cba624a048ad6766dfd60a626, type: 3}
       propertyPath: m_Name
@@ -6052,6 +6060,10 @@ PrefabInstance:
     - target: {fileID: 5673022780334770583, guid: ae8e4b0530be6964889c09da159ed666, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6797540349570997634, guid: ae8e4b0530be6964889c09da159ed666, type: 3}
+      propertyPath: dropChance
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7284408043877546218, guid: ae8e4b0530be6964889c09da159ed666, type: 3}
       propertyPath: m_Name
