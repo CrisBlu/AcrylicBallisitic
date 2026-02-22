@@ -23,6 +23,8 @@ public class Movement : MonoBehaviour
 
     [SerializeField] Animator animator;
 
+    [SerializeField] ParticleSystem muzzleFlash;
+
     private InputAction movement;
     private Rigidbody rb;
     private InputAction attack;
@@ -44,6 +46,7 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         wallCheck = LayerMask.GetMask("Wall");
+        muzzleFlash.Stop();
     }
 
     void OnDestroy()
@@ -116,6 +119,7 @@ public class Movement : MonoBehaviour
         }
 
         GameManager.GetManager().PlaySound("PLAYER_SHOOT", 0.5f);
+        muzzleFlash?.Play();
 
         //Will shoot past the cursor location and hit anything behind, can limit range to where was click if needed
 

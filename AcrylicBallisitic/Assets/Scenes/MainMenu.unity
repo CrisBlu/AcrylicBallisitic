@@ -1382,7 +1382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00c26237397dc842b923ed2868a029b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioPlayer
-  audioAssets: {fileID: 11400000, guid: 20b68e3d1a710b6479aa31f605373193, type: 2}
+  audioAssets: {fileID: 11400000, guid: 3284fc97332e2524d8d33455a05d5684, type: 2}
 --- !u!4 &63334413
 Transform:
   m_ObjectHideFlags: 0
