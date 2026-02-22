@@ -121,6 +121,7 @@ public class GameManager : MonoBehaviour
         if (IsGracePeriod()) return;
         playerHitPoints = Mathf.Max(0, playerHitPoints - 1);
         uiManager.UpdatePlayerHitPoints(playerHitPoints);
+        SceneCamera.Inst.Shake(.25f, .1f);
 
         if(playerHitPoints <= 0)
         {
@@ -128,7 +129,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            PlaySound("PLAYER_PAIN", 2f);
+            PlaySound("PLAYER_PAIN", 20f);
         }
     }
 
@@ -159,6 +160,7 @@ public class GameManager : MonoBehaviour
     public void ReloadBullet()
     {
         iBullet++;
+        iBullet = Mathf.Clamp(iBullet, 0, 5);
         playerAmmo[iBullet] = Ammo.Loaded;
         uiManager.UpdatePlayerAmmo(playerAmmo);
     }
