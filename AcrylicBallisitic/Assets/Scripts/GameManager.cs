@@ -242,12 +242,6 @@ public class GameManager : MonoBehaviour
         float reticleSize = Mathf.Max(.5f, player.MultiShotPenalty * player.penaltyLevel);
         uiManager.UpdateReticle(reticleSize);
 
-        gracePeriod -= Time.deltaTime;
-        if (gracePeriod > 0.0f) return;
-
-        spawnTimer += Time.deltaTime;
-        spawnInterval -= Time.deltaTime * 0.05f;
-
         if (previousNetWorth > GetNetWorth())
         {
             if (damageDecayTimer > 0.0f)
@@ -271,6 +265,12 @@ public class GameManager : MonoBehaviour
                 uiManager.UpdateNetWorth(GetNetWorth(), previousNetWorth, 0.0f);
             }
         }
+
+        gracePeriod -= Time.deltaTime;
+        if (gracePeriod > 0.0f) return;
+
+        spawnTimer += Time.deltaTime;
+        spawnInterval -= Time.deltaTime * 0.05f;
 
         if (ShouldSpawn())
         {

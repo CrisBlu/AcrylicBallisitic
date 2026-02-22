@@ -3647,6 +3647,11 @@ MonoBehaviour:
   m_FadeFactor: 1
   version: 1
   m_DecalLayerMask: 1
+--- !u!198 &1280217422 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 9207817955462597906, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
+  m_PrefabInstance: {fileID: 205046389}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1427503191
 GameObject:
   m_ObjectHideFlags: 0
@@ -6893,8 +6898,7 @@ MonoBehaviour:
   penaltyLevel: 0
   PowerupDuration: 3.5
   animator: {fileID: 1881789588}
-  canShoot: 1
-  paused: 0
+  muzzleFlash: {fileID: 1280217422}
 --- !u!4 &5118248912344058848
 Transform:
   m_ObjectHideFlags: 0
