@@ -61,6 +61,9 @@ public class GameManager : MonoBehaviour
 
     Ammo[] playerAmmo;
 
+    public bool isPaused = false;
+
+    public GameObject pauseMenuUI;
     public void SetGracePeriod(float value) { gracePeriod = value; }
     public bool IsGracePeriod() { return gracePeriod > 0.0f; }
 
@@ -213,6 +216,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        pauseMenuUI.SetActive(false);
+        gracePeriod = 2.0f;
         SetGracePeriod(8.0f);
         uiManager.UpdatePlayerHitPoints(playerHitPoints);
         uiManager.UpdatePlayerAmmo(playerAmmo);
@@ -233,6 +238,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        //Debug.Log($"<color=red>Game Paused.</color> Cursor State: {Cursor.lockState} | Visible: {Cursor.visible}");
         float reticleSize = Mathf.Max(.5f, player.MultiShotPenalty * player.penaltyLevel);
         uiManager.UpdateReticle(reticleSize);
 
@@ -288,6 +294,34 @@ public class GameManager : MonoBehaviour
     {
         playerHitPoints = Mathf.Max(0, playerHitPoints + 1);
         uiManager.UpdatePlayerHitPoints(playerHitPoints);
+    }
+
+    public bool TogglePause()
+    {
+        isPaused = !isPaused;
+        GameObject player = GameObject.FindWithTag("Player");
+        Movement Move = player.GetComponent<Movement>();
+        if (isPaused)
+        {
+            // 1. Freeze/Unfreeze time (Physics, Animations, Timers)
+            Time.timeScale = 0f;
+
+            // 2. Lock/Unlock the cursor so the player can use a menu
+            //Cursor.lockState = CursorLockMode.None;
+            pauseMenuUI.SetActive(true);
+            Cursor.visible = true;
+            //Move.canShoot = false;
+            return true;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            //Cursor.lockState = CursorLockMode.Locked;
+            pauseMenuUI.SetActive(false);
+            Cursor.visible = false;
+            //Move.canShoot = true;
+            return false;
+        }
     }
 }
 

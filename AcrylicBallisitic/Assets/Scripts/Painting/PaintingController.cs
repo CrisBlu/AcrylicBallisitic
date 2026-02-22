@@ -108,9 +108,10 @@ public class PaintingController : MonoBehaviour
 
                 if (rb != null)
                 {
-                    Vector3 forceDirection = new Vector3(Random.Range(-0.5f, 0.5f), 1f, Random.Range(-0.5f, 0.5f));
-                    float forceStrength = 5f;
-                    rb.AddForce(forceDirection.normalized * forceStrength, ForceMode.Impulse);
+                    //Vector3 forceDirection = new Vector3(Random.Range(-0.5f, 0.5f), 1f, Random.Range(0, 0.5f));
+                    Vector3 direction = Vector3.Normalize(GameManager.GetManager().GetPlayerPosition() - transform.position);
+                    float forceStrength = Random.Range(.5f, 8f);
+                    rb.AddForce(direction * forceStrength, ForceMode.Impulse);
                 }
             }
         }

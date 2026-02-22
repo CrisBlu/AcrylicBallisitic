@@ -18,7 +18,10 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
         yield return new WaitForSeconds(0.25f);
         SceneManager.LoadScene(scene);
     }
-
+    public void Unpause()
+    {
+        GameManager.GetManager().TogglePause();
+    }
     public async void DelaySwitchScenes(int scene)
     {
         float timer = 0;
