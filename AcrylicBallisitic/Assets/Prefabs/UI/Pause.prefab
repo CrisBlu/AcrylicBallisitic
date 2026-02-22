@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 254923495831441481}
   - component: {fileID: 6114876031639556207}
   - component: {fileID: 141563431579736607}
+  - component: {fileID: 9050370282390447273}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -249,6 +250,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f8e63a8439e41498bf6d2a5b004536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuButton
+--- !u!114 &9050370282390447273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5866011580839318435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00c26237397dc842b923ed2868a029b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioPlayer
+  audioAssets: {fileID: 0}
 --- !u!1 &6030204993299417871
 GameObject:
   m_ObjectHideFlags: 0
