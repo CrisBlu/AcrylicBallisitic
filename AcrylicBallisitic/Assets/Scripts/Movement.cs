@@ -122,6 +122,11 @@ public class Movement : MonoBehaviour
             return;
         }
 
+        if(GameManager.GetManager().IsGracePeriod())
+        {
+            return;
+        }
+
         if(!canShoot)
         {
             Debug.Log("Can't shoot");
