@@ -249,11 +249,18 @@ public class Movement : MonoBehaviour
 
 
         float reloadTimePerBullet = perfectRound ? .5f/6 : ReloadTime / 6;
+        float localReloadTime = reloadTimePerBullet;
+        
+
+
         
 
         for (int i = 0; i < 6; i++)
         {
-            while (timer < reloadTimePerBullet)
+            if (!perfectRound && playerAmmo[i] == Ammo.Hit)
+                localReloadTime /= 2;
+
+            while (timer < localReloadTime)
             {
                 timer += Time.deltaTime;
                 await Task.Yield();
