@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         int count = 0;
         for(int i = 0; i < 6; i ++)
         {
-            if (playerAmmo[i] == Ammo.Loaded)
+            if (playerAmmo[i] == Ammo.Loaded || playerAmmo[i] == Ammo.PowerUp)
                 count++;
         }
 
@@ -117,6 +117,7 @@ public class GameManager : MonoBehaviour
 
     public void UseBullet(bool hit)
     {
+        if (playerAmmo[iBullet] == Ammo.PowerUp) return;
         playerAmmo[iBullet] = hit ? Ammo.Hit : Ammo.Miss;
         iBullet--;
         uiManager.UpdatePlayerAmmo(playerAmmo);
@@ -131,6 +132,7 @@ public class GameManager : MonoBehaviour
 
     public void AmmoPowerUp()
     {
+        iBullet = 5;
         for (int i = 0; i < 6; i++)
         {
             playerAmmo[i] = Ammo.PowerUp;
@@ -140,6 +142,7 @@ public class GameManager : MonoBehaviour
 
     public void AmmoPowerDown()
     {
+        iBullet = 5;
         for (int i = 0; i < 6; i++)
         {
             playerAmmo[i] = Ammo.Loaded;

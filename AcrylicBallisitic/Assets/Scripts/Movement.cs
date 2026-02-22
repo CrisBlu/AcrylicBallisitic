@@ -253,6 +253,7 @@ public class Movement : MonoBehaviour
         isPoweredUp = true;
         yield return new WaitForSeconds(PowerupDuration);
         isPoweredUp = false;
+        GameManager.GetManager().AmmoPowerDown();
     }
 
     public void TriggerPowerUp()

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 238973613234632434}
   - component: {fileID: 1611133557315275874}
   - component: {fileID: 3830270945082024567}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,6 +187,10 @@ PrefabInstance:
     - target: {fileID: 7254475475433471942, guid: 4a1da0a73fc3aee4db2c6e3b308b4f78, type: 3}
       propertyPath: m_Name
       value: PowerBottle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254475475433471942, guid: 4a1da0a73fc3aee4db2c6e3b308b4f78, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8417977635140683990, guid: 4a1da0a73fc3aee4db2c6e3b308b4f78, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

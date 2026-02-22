@@ -1115,7 +1115,8 @@ MonoBehaviour:
   slotPrefab: {fileID: 1236137847816925533, guid: 9773710dcc9a5a54a872b5a1fa9b93aa, type: 3}
   fullSlotSprite: {fileID: 21300000, guid: cb41182d880d432459a1a6ff591d3d92, type: 3}
   emptySlotSprite: {fileID: 21300000, guid: b29eded956579a9408a64257cccb9bba, type: 3}
-  specialSlotSprite: {fileID: 0}
+  hitSlotSprite: {fileID: 0}
+  powerUpSlotSprite: {fileID: 0}
   maxSlots: 6
 --- !u!1 &7152447120832157848
 GameObject:
@@ -1436,7 +1437,8 @@ MonoBehaviour:
   slotPrefab: {fileID: 7247765028794429638, guid: c735afb5b54663e4992c3f8c646a9bbb, type: 3}
   fullSlotSprite: {fileID: 21300000, guid: 664bf43f8eecf524c8f6278efd0e5a73, type: 3}
   emptySlotSprite: {fileID: 21300000, guid: c14c99cdf11e9ec46ba10260a060af56, type: 3}
-  specialSlotSprite: {fileID: 21300000, guid: 482ce4fef3674e84ab1d0534a0fcd63a, type: 3}
+  hitSlotSprite: {fileID: 21300000, guid: 482ce4fef3674e84ab1d0534a0fcd63a, type: 3}
+  powerUpSlotSprite: {fileID: 21300000, guid: 801ef179441ede24db7ae274553e0174, type: 3}
   maxSlots: 6
 --- !u!1 &8859655020331702473
 GameObject:
