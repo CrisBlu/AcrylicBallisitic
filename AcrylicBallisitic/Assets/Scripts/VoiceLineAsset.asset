@@ -42,6 +42,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 15742949da9b59d41973c2da8906b8ae, type: 3}
     variations: []
   - enabled: 1
-    name: PLAYER_DEATH
-    clip: {fileID: 8300000, guid: 15742949da9b59d41973c2da8906b8ae, type: 3}
+    name: WIN
+    clip: {fileID: 8300000, guid: e24d43f6c6fd530488c0a887b0f85953, type: 3}
+    variations: []
+  - enabled: 1
+    name: LOSE
+    clip: {fileID: 8300000, guid: 61d184aa9c7dda34c9f611bc82504102, type: 3}
     variations: []

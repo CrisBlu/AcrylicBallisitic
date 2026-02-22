@@ -56,13 +56,13 @@ public class DifficultyProgression : MonoBehaviour
             case DifficultyLevel.Normal:
                 GameManager.GetManager().SetGracePeriod(10.0f);
                 GameManager.GetManager().PlayVoiceLine("GHOST_LINE_NORMAL");
-                yield return new WaitForSeconds(5.0f);
+                yield return new WaitForSeconds(4.5f);
                 GameManager.GetManager().PlayVoiceLine("PLAYER_LINE_NORMAL");
                 break;
             case DifficultyLevel.Difficult:
                 GameManager.GetManager().SetGracePeriod(10.0f);
                 GameManager.GetManager().PlayVoiceLine("GHOST_LINE_DIFFICULT");
-                yield return new WaitForSeconds(4.0f);
+                yield return new WaitForSeconds(3.5f);
                 GameManager.GetManager().PlayVoiceLine("PLAYER_LINE_DIFFICULT");
                 break;
         }
