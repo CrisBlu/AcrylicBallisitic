@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 752399071017927489}
   - component: {fileID: 7893509656224827882}
   - component: {fileID: 7654790486583032235}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HorseProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,6 +325,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 95f54aa5ee12c3d4db549f440fb23ee5, type: 3}
       propertyPath: m_Name
       value: horse
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 95f54aa5ee12c3d4db549f440fb23ee5, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

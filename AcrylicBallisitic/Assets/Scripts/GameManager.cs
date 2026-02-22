@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            PlaySound("PLAYER_PAIN");
+            PlaySound("PLAYER_PAIN", 2f);
         }
     }
 
