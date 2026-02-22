@@ -46,7 +46,7 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         wallCheck = LayerMask.GetMask("Wall");
-        muzzleFlash.Stop();
+        muzzleFlash.gameObject.SetActive(false);
     }
 
     void OnDestroy()
@@ -119,6 +119,7 @@ public class Movement : MonoBehaviour
         }
 
         GameManager.GetManager().PlaySound("PLAYER_SHOOT", 0.5f);
+        muzzleFlash?.gameObject.SetActive(true);
         muzzleFlash?.Play();
 
         //Will shoot past the cursor location and hit anything behind, can limit range to where was click if needed
