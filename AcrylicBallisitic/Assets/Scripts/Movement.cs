@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine.InputSystem;
 
@@ -18,6 +19,8 @@ public class Movement : MonoBehaviour
     [SerializeField] public float MultiShotPenalty = .5f;
     [HideInInspector] public int penaltyLevel = 0;
 
+    [SerializeField] public float PowerupDuration = 3.5f;
+
     [SerializeField] Animator animator;
 
     private InputAction movement;
@@ -27,6 +30,7 @@ public class Movement : MonoBehaviour
     Vector2 direction = Vector2.zero;
     Vector3 LookVec;
     private bool canShoot = true;
+    private bool isPoweredUp = false;
 
     LayerMask wallCheck;
     
@@ -40,9 +44,11 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         wallCheck = LayerMask.GetMask("Wall");
-        
-        
-        
+    }
+
+    void OnDestroy()
+    {
+        attack.performed -= Shoot;
     }
 
     void FixedUpdate()
@@ -101,13 +107,15 @@ public class Movement : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext context)
     {
+        if (GameManager.GetManager().IsGracePeriod()) return;
+
         if(!canShoot)
         {
             Debug.Log("Can't shoot");
             return;
         }
 
-        GameManager.GetManager().PlaySound("PLAYER_SHOOT");
+        GameManager.GetManager().PlaySound("PLAYER_SHOOT", 0.25f);
 
         //Will shoot past the cursor location and hit anything behind, can limit range to where was click if needed
 
@@ -133,7 +141,7 @@ public class Movement : MonoBehaviour
             {
                 hitSomething = true;
                 hit.collider.gameObject.GetComponent<PaintingController>().DoDamage(10);
-                
+                GameManager.GetManager().PlaySound("PLAYER_HIT");
             }
             else
             {
@@ -142,13 +150,18 @@ public class Movement : MonoBehaviour
 
 
             //Shooting
-            GameManager.GetManager().UseBullet(hitSomething);
-            if(GameManager.GetManager().GetPlayerAmmoCount() == 0)
+            if (!isPoweredUp)
+            {
+                GameManager.GetManager().UseBullet(hitSomething);
+            }
+
+            if (GameManager.GetManager().GetPlayerAmmoCount() == 0)
             {
                 canShoot = false;
                 Reload();
             }
-            
+
+
 
             //Bullet Line
             GameObject BFXObj = Instantiate(BulletFX, Gun);
@@ -158,9 +171,13 @@ public class Movement : MonoBehaviour
 
             BFXLineFade(BFXObj);
 
-            penaltyLevel++;
-            SceneCamera.Inst.Shake(.5f * penaltyLevel);
-            penaltyTimer = PenaltyDuration;
+            if (!isPoweredUp)
+            {
+                penaltyLevel++;
+                SceneCamera.Inst.Shake(.5f * penaltyLevel);
+                penaltyTimer = PenaltyDuration;
+            }
+
 
 
 
@@ -205,10 +222,8 @@ public class Movement : MonoBehaviour
             }
         }
 
-
         float reloadTimePerBullet = perfectRound ? .5f/6 : ReloadTime / 6;
         
-
         for (int i = 0; i < 6; i++)
         {
             while (timer < reloadTimePerBullet)
@@ -217,14 +232,14 @@ public class Movement : MonoBehaviour
                 await Task.Yield();
             }
 
+            if (isPoweredUp) return;
+
             timer = 0;
-            GameManager.GetManager().ReloadBullet();
+            GameManager.GetManager()?.ReloadBullet();
+            GameManager.GetManager()?.PlaySound("PLAYER_RELOAD");
         }
 
         canShoot = true;
-        
-        GameManager.GetManager().PlaySound("PLAYER_RELOAD");
-        
     }
 
     public void DecreasePenalty()
@@ -233,10 +248,19 @@ public class Movement : MonoBehaviour
             penaltyLevel--;
 
     }
-    
 
-  
-    
+    IEnumerator PowerUp()
+    {
+        isPoweredUp = true;
+        canShoot = true;
+        yield return new WaitForSeconds(PowerupDuration);
+        isPoweredUp = false;
+        GameManager.GetManager().AmmoPowerDown();
+    }
 
-
+    public void TriggerPowerUp()
+    {
+        StartCoroutine(PowerUp());
+        GameManager.GetManager().AmmoPowerUp();
+    }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class DifficultyProgression : MonoBehaviour
         Difficult,
     }
 
-    public DifficultyLevel currentDifficulty = DifficultyLevel.Easy;
+    public DifficultyLevel currentDifficulty = DifficultyLevel.Difficult;
     public float normalThreshold = 0.66f;
     public float difficultThreshold = 0.33f;
 
@@ -39,6 +40,31 @@ public class DifficultyProgression : MonoBehaviour
         {
             currentDifficulty = newDifficulty;
             EventManager.Broadcast(new DifficultyChangedEvent(currentDifficulty));
+            StartCoroutine(PlayDifficultyLine());
+        }
+    }
+
+    IEnumerator PlayDifficultyLine()
+    {
+        switch (currentDifficulty)
+        {
+            case DifficultyLevel.Easy:
+                GameManager.GetManager().PlayVoiceLine("GHOST_LINE_EASY");
+                yield return new WaitForSeconds(3.0f);
+                GameManager.GetManager().PlayVoiceLine("PLAYER_LINE_EASY");
+                break;
+            case DifficultyLevel.Normal:
+                GameManager.GetManager().SetGracePeriod(10.0f);
+                GameManager.GetManager().PlayVoiceLine("GHOST_LINE_NORMAL");
+                yield return new WaitForSeconds(4.5f);
+                GameManager.GetManager().PlayVoiceLine("PLAYER_LINE_NORMAL");
+                break;
+            case DifficultyLevel.Difficult:
+                GameManager.GetManager().SetGracePeriod(10.0f);
+                GameManager.GetManager().PlayVoiceLine("GHOST_LINE_DIFFICULT");
+                yield return new WaitForSeconds(3.5f);
+                GameManager.GetManager().PlayVoiceLine("PLAYER_LINE_DIFFICULT");
+                break;
         }
     }
 
