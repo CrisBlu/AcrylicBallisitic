@@ -10,6 +10,6 @@ public class AutoAudioPlayer : MonoBehaviour
     void Start()
     {
         audioPlayer = GetComponent<AudioPlayer>();
-        audioPlayer.PlaySound(soundName);
+        audioPlayer.PlaySound(soundName, 1f, true);
     }
 }

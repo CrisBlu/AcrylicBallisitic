@@ -115,7 +115,7 @@ public class Movement : MonoBehaviour
             return;
         }
 
-        GameManager.GetManager().PlaySound("PLAYER_SHOOT", 0.25f);
+        GameManager.GetManager().PlaySound("PLAYER_SHOOT", 0.5f);
 
         //Will shoot past the cursor location and hit anything behind, can limit range to where was click if needed
 
