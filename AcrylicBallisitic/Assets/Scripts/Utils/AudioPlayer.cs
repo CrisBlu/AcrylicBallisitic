@@ -89,6 +89,7 @@ public class AudioPlayer : MonoBehaviour
         if (e.shouldLower)
         {
             SetMusicVolume(0.15f);
+            
         }
         else
         {
