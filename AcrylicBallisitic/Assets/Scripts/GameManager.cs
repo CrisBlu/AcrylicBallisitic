@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(AudioPlayer))]
 public class GameManager : MonoBehaviour
 {
     [Header("Gameplay")]
@@ -215,7 +214,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        gracePeriod = 8.0f;
+        SetGracePeriod(8.0f);
         uiManager.UpdatePlayerHitPoints(playerHitPoints);
         uiManager.UpdatePlayerAmmo(playerAmmo);
         difficultyProgression.currentDifficulty = DifficultyProgression.DifficultyLevel.Difficult;
