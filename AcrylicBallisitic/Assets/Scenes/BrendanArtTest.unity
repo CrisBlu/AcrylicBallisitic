@@ -991,6 +991,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9b240488a171e64e9a70435d837edf0, type: 3}
+--- !u!1001 &1090118502
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 104321096009191323, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 104321096009191323, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5898437
+      objectReference: {fileID: 0}
+    - target: {fileID: 104321096009191323, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.354265
+      objectReference: {fileID: 0}
+    - target: {fileID: 104321096009191323, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70846915
+      objectReference: {fileID: 0}
+    - target: {fileID: 104321096009191323, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.70574176
+      objectReference: {fileID: 0}
+    - target: {fileID: 104321096009191323, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 104321096009191323, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 104321096009191323, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 89.779
+      objectReference: {fileID: 0}
+    - target: {fileID: 104321096009191323, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 104321096009191323, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4158259771940323454, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
+      propertyPath: m_Name
+      value: MuzzleFlash (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
 --- !u!1001 &1095566816
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3058,20 +3115,8 @@ PrefabInstance:
       value: MuzzleFlash
       objectReference: {fileID: 0}
     - target: {fileID: 9207817955462597906, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
-      propertyPath: moveWithTransform
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9207817955462597906, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
       propertyPath: SizeModule.enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9207817955462597906, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
-      propertyPath: InitialModule.rotation3D
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9207817955462597906, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9207817955462597906, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
       propertyPath: InitialModule.startRotation.scalar
@@ -3092,10 +3137,6 @@ PrefabInstance:
     - target: {fileID: 9207817955462597906, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].time
       value: 0.954834
-      objectReference: {fileID: 0}
-    - target: {fileID: 9207817955462597906, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].value
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9207817955462597906, guid: efbef09095bdf9b41a9264f416ff4cc5, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].value
@@ -3268,3 +3309,4 @@ SceneRoots:
   - {fileID: 1764743180}
   - {fileID: 7331796385625852270}
   - {fileID: 6920329514692876390}
+  - {fileID: 1090118502}
