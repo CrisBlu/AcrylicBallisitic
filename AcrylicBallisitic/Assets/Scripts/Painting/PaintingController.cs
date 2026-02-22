@@ -50,6 +50,7 @@ public class PaintingController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.GetManager().IsGracePeriod()) return;
         if (movement.GetState() == PaintingMovement.State.Moving)
         {
             if (projectilePrefabs != null && projectilePrefabs.Count > 0)

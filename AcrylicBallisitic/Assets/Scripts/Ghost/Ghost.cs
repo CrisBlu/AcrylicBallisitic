@@ -54,6 +54,8 @@ public class Ghost : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.GetManager().IsGracePeriod()) return;
+
         flashInterval -= Time.deltaTime;
         if (indicator != null && flashInterval <= 0f)
         {
