@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::JumpPaintingMovement
   jumpCount: 4
   jumpSpeed: 16
-  idleDuration: 2
+  idleDuration: 0.5
 --- !u!114 &6787822735432115921
 MonoBehaviour:
   m_ObjectHideFlags: 0

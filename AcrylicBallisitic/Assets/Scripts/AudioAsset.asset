@@ -72,3 +72,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 71fa03db8c59b6349ba6d6f188c04488, type: 3}
     - {fileID: 8300000, guid: 95f2d6761f2668542bdc8214d4f43dc6, type: 3}
     - {fileID: 8300000, guid: b8c1ac7a855539e4aa4b88a81ea64bcb, type: 3}
+  - enabled: 1
+    name: PLAYER_HIT
+    clip: {fileID: 8300000, guid: c077b3be3e884154d9ab0a42ec89ff40, type: 3}
+    variations: []

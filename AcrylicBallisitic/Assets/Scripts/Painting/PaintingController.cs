@@ -20,6 +20,7 @@ public class PaintingController : MonoBehaviour
     {
         if (movement.GetState() != PaintingMovement.State.None) return;
         movement.Emerge();
+        projectileSpawnTimer = projectileSpawnInterval * 0.75f;
     }
 
     public void DoDamage(float damage)
