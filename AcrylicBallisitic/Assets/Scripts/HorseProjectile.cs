@@ -22,6 +22,8 @@ public class HorseProjectile : MonoBehaviour
 
     private Vector3 spawnLocation;
     private Quaternion spawnRotation;
+    
+    float randomShake = 0f;
 
     void Start()
     {
@@ -40,6 +42,8 @@ public class HorseProjectile : MonoBehaviour
         {
             GameManager.GetManager().PlaySound("PROJECTILE");
         }
+
+        randomShake = Random.Range(0.02f, 0.06f);
     }
 
     void Update()
@@ -47,7 +51,7 @@ public class HorseProjectile : MonoBehaviour
        Vector3 newPosition = transform.position + transform.forward * Speed * Time.deltaTime;
        if (ProjectileType != ProjectileType.Single)
        {
-            newPosition += transform.right * Mathf.Sin(Time.time * 20f) * Random.Range(-0.2f, 0.2f); // Add slight horizontal wave
+            newPosition += transform.right * Mathf.Sin(Time.time * 20f) * randomShake; // Add slight horizontal wave
        }
        transform.position = newPosition;
     }
